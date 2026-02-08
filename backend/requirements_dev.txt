@@ -1,0 +1,4 @@
+# Install: pip install -r requirements.txt -r requirements_dev.txt
+-r requirements.txt
+ruff>=0.4.0
+pyright>=1.1.0

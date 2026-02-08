@@ -1,0 +1,27 @@
+---
+description: Next.js + shadcn 规范，响应式与 Loading/Error 处理
+globs: frontend/**
+alwaysApply: false
+---
+
+# Frontend Architect
+
+## 强制
+
+1. **UI 组件**：使用 shadcn/ui 组件（或与 `components.json` 一致的 `@/components/ui`），禁止随意引入其他 UI 库导致风格分裂。
+2. **响应式**：布局与字体需适配移动端与桌面端（Tailwind 断点：`sm/md/lg`），关键交互在移动端可用。
+3. **异步与状态**：所有会发请求或异步操作的交互，必须显式处理：
+   - **Loading**：请求进行中展示加载态（如骨架、Spinner、禁用按钮）。
+   - **Error**：请求失败展示错误信息与可选的「重试」等操作。
+4. **类型**：禁止 `any`；接口返回用类型或接口定义，与 backend `ApiResponse` 一致。
+
+## 约定
+
+- 页面与路由放在 `src/app/`，可复用组件放在 `src/components/`。
+- 与后端通信优先通过 `src/app/api/` 的 Route Handler 或配置的 `NEXT_PUBLIC_API_URL` 直连。
+- 新功能先确认 `docs/spec/active/` 有对应 spec（非 Bug 变更）。
+
+## 示例
+
+- 列表页：`loading` → 骨架/文案；`error` → 错误文案 + 重试；`data` → 列表渲染。
+- 提交表单：提交中禁用按钮或显示 Spinner；失败展示后端返回的 error 或统一错误提示。

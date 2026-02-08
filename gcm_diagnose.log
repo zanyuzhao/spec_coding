@@ -1,0 +1,196 @@
+Diagnose log at 2026-02-07T09:36:02Z
+
+AppPath: C:\Program Files\Git\mingw64\bin\git-credential-manager.exe
+InstallDir: C:\Program Files\Git\mingw64\bin\
+Version: 2.6.1+786ab03440ddc82e807a97c0e540f5247e44cec6
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Windows
+OSVersion: 10.0 (build 22631)
+Reading environment variables... OK
+ Variables:
+CURSOR_TRACE_ID=d77aa71ee5ac45f0ba6274d8b2ae044c
+DriverData=C:\Windows\System32\Drivers\DriverData
+COMPUTERNAME=PC-202512122043
+GIT_TRACE2_PARENT_SID=f780c0a8-a01d-4226-8374-bbe362ca249b
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+_CONDA_EXE=C:\ProgramData\Miniconda3\Scripts\conda.exe
+COLORTERM=truecolor
+CONDA_PYTHON_EXE=C:\ProgramData\Miniconda3\python.exe
+CONDA_DEFAULT_ENV=base
+SESSIONNAME=Console
+__CONDA_OPENSLL_CERT_FILE_SET=1
+TMP=C:\Users\ADMINI~1\AppData\Local\Temp
+PROCESSOR_REVISION=7100
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+HOMEPATH=\Users\Administrator
+CUDA_PATH_V12_6=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6
+GIT_ASKPASS=d:\cursor\resources\app\extensions\git\dist\askpass.sh
+GIT_EXEC_PATH=C:/Program Files/Git/mingw64/libexec/git-core
+TEMP=C:\Users\ADMINI~1\AppData\Local\Temp
+LOCALAPPDATA=C:\Users\Administrator\AppData\Local
+MSYSTEM=MINGW64
+TERM=xterm-256color
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD
+HF_ENDPOINT=https://hf-mirror.com
+CONDA_EXE=C:\ProgramData\Miniconda3\Scripts\conda.exe
+USERDOMAIN=PC-202512122043
+CONDA_SHLVL=1
+Path=C:/Program Files/Git/mingw64/libexec/git-core;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Administrator\bin;C:\ProgramData\Miniconda3;C:\ProgramData\Miniconda3\Library\mingw-w64\bin;C:\ProgramData\Miniconda3\Library\usr\bin;C:\ProgramData\Miniconda3\Library\bin;C:\ProgramData\Miniconda3\Scripts;C:\ProgramData\Miniconda3\bin;C:\ProgramData\Miniconda3\condabin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6\libnvvp;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;D:\cursor\resources\app\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\NVIDIA Corporation\Nsight Compute 2024.3.2;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\Users\Administrator\.local\bin;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Local\GitHubDesktop\bin;C:\ProgramData\Miniconda3;C:\ProgramData\Miniconda3\Scripts;C:\ProgramData\Miniconda3\Library\bin;C:\Users\Administrator\AppData\Local\GitHubDesktop\bin;D:\pycharm\PyCharm 2025.3\bin
+TERM_PROGRAM=vscode
+PROCESSOR_LEVEL=23
+NUMBER_OF_PROCESSORS=12
+TMPDIR=C:\Users\ADMINI~1\AppData\Local\Temp
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=
+VSCODE_GIT_ASKPASS_NODE=D:\cursor\Cursor.exe
+TERM_PROGRAM_VERSION=2.4.22
+VSCODE_GIT_ASKPASS_MAIN=d:\cursor\resources\app\extensions\git\dist\askpass-main.js
+ProgramFiles(x86)=C:\Program Files (x86)
+PUBLIC=C:\Users\Public
+VSCODE_GIT_IPC_HANDLE=\\.\pipe\vscode-git-a615954e04-sock
+FPS_BROWSER_USER_PROFILE_STRING=Default
+CommonProgramFiles=C:\Program Files (x86)\Common Files
+VSCODE_GIT_IPC_AUTH_TOKEN=6ab2e7970ed56d40397b58ef193266fba33f496624ed270dbd1c1a7fb7054b0e
+VSCODE_INJECTION=1
+EFC_7692=1
+CHROME_CRASHPAD_PIPE_NAME=\\.\pipe\crashpad_21472_UEKXVEAPHCNHIYGL
+StartPageUrl=http://www.2345.com/?k155436
+SSL_CERT_FILE=C:\ProgramData\Miniconda3\Library\ssl\cacert.pem
+PLINK_PROTOCOL=ssh
+ProgramData=C:\ProgramData
+ProgramW6432=C:\Program Files
+ProgramFiles=C:\Program Files (x86)
+CONDA_PROMPT_MODIFIER=(base) 
+_CONDA_ROOT=C:\ProgramData\Miniconda3
+SystemRoot=C:\Windows
+CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6
+HOME=C:\Users\Administrator
+CommonProgramW6432=C:\Program Files\Common Files
+LOGONSERVER=\\PC-202512122043
+USERPROFILE=C:\Users\Administrator
+CONDA_PREFIX=C:\ProgramData\Miniconda3
+USERDOMAIN_ROAMINGPROFILE=PC-202512122043
+PyCharm=D:\pycharm\PyCharm 2025.3\bin
+APPDATA=C:\Users\Administrator\AppData\Roaming
+HOMEDRIVE=C:
+PSModulePath=D:\Backup\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+USERNAME=Administrator
+PROCESSOR_ARCHITEW6432=AMD64
+FPS_BROWSER_APP_PROFILE_STRING=Internet Explorer
+PROCESSOR_ARCHITECTURE=x86
+OS=Windows_NT
+ComSpec=C:\Windows\system32\cmd.exe
+SystemDrive=C:
+windir=C:\Windows
+LANG=en_US.UTF-8
+ALLUSERSPROFILE=C:\ProgramData
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is 'C:\Users\Administrator\AppData\Local\Temp\'...
+Checking basic file I/O...
+Writing to temporary file 'C:\Users\Administrator\AppData\Local\Temp\b385415db335d165723eb8fd'... OK
+Reading from temporary file 'C:\Users\Administrator\AppData\Local\Temp\b385415db335d165723eb8fd'... OK
+Deleting temporary file 'C:\Users\Administrator\AppData\Local\Temp\b385415db335d165723eb8fd'... OK
+Testing IFileSystem instance...
+UserHomePath: C:\Users\Administrator
+UserDataDirectoryPath: C:\Users\Administrator\.gcm
+GetCurrentDirectory(): D:\code\spec_coding
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com...Sending HEAD request to https://example.com... OK
+ OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:62662/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.52.0.windows.1'
+Locating current repository...Not inside a Git repository.
+ OK
+Listing all Git configuration... OK
+Git configuration:
+file:C:/Program Files/Git/etc/gitconfig	diff.astextplain.textconv=astextplain
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.required=true
+file:C:/Program Files/Git/etc/gitconfig	http.sslbackend=schannel
+file:C:/Program Files/Git/etc/gitconfig	core.autocrlf=true
+file:C:/Program Files/Git/etc/gitconfig	core.fscache=true
+file:C:/Program Files/Git/etc/gitconfig	core.symlinks=false
+file:C:/Program Files/Git/etc/gitconfig	pull.rebase=false
+file:C:/Program Files/Git/etc/gitconfig	credential.helper=manager
+file:C:/Program Files/Git/etc/gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:C:/Program Files/Git/etc/gitconfig	init.defaultbranch=master
+file:C:/Users/Administrator/.gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Users/Administrator/.gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Users/Administrator/.gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Users/Administrator/.gitconfig	filter.lfs.required=true
+file:C:/Users/Administrator/.gitconfig	user.name=zanyuzhao
+file:C:/Users/Administrator/.gitconfig	user.email=625580893@qq.com
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: True
+Exception: None
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential... OK
+Reading test credential... OK
+Deleting test credential... OK
+
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker is not enabled.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: C:\Users\Administrator\AppData\Local\.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: C:\Users\Administrator\AppData\Local\.IdentityService\msal.cache
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+
