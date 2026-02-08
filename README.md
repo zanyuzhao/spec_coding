@@ -43,9 +43,9 @@
 - **技能 (skills)**：在改 API、命名、写测试时提供统一约定，减少风格分裂。
 - **docs/spec**：`active/` 进行中需求，`archive/` 已归档，`specs/` 为当前系统的「单一事实来源」，归档时把 delta 合并进去。
 
-### Spec 工作流程（一句话 + 示意）
+### Spec 工作流程
 
-**一句话**：你说「加/改功能」→ AI 先写/更新 `docs/spec/active/` 里的需求 → 再按该需求实现代码；你说「归档」→ AI 做「实现 vs spec」校验 → 把变更合并进 `specs/<领域>/` 并移入 `archive/`。
+**工作流程**：你说「加/改功能或者直接描述需求」→ AI 先写/更新 `docs/spec/active/` 里的需求 → 再按该需求实现代码；你说「归档」→ AI 做「实现 vs spec」校验 → 把变更合并进 `specs/<领域>/` 并移入 `archive/`。
 
 ```
   你：「加一个 xxx 功能」 / 「把 xxx 改成 yyy」
@@ -76,6 +76,10 @@
 
 修 Bug、提问、纯讨论设计**不会**触发上述流程，直接按你的问题响应。
 
+你也可以在对话时先让其生曾需求和设计文档，待自己检查了 docs/spec/active 下生成的需求文件无误后再要求ai根据文档开发
+
+**注意：** 暂未设计出好的归档流程，当一个需求开发完毕后，要主动要求ai帮忙**归档**，可以清理需求开发过程中的中间文档以及将新功能写入项目文档中，否则你的开发中任务会越来越多，不利于管理
+
 ---
 
 ## 目录结构
@@ -89,15 +93,10 @@
 - `.cursor/rules/` — 五条规则：`spec_trigger`、`spec_manager`、`fastapi_shield`、`frontend_architect`、`global_guard`
 - `.cursor/skills/` — 项目技能：API 与 Pydantic 风格、领域命名规范等
 
-## 本地运行
+# 技术栈
+项目以python后端和Next.js 14 + shadcn/ui前端技术栈为例，配备的skill也是针对这两个技术栈的
+如果使用其他技术栈，只需要让ai帮忙替换掉对应的skill即可
 
-```bash
-# 后端
-cd backend && pip install -r requirements.txt && uvicorn app.main:app --reload
-
-# 前端（另开终端）
-cd frontend && npm i && npm run dev
-```
 
 **后端 Lint / 类型检查**（可选）：`pip install -r requirements_dev.txt` 后执行 `ruff check .`、`ruff format --check .`、`pyright`。
 
