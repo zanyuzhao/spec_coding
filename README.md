@@ -1,14 +1,93 @@
 # Spec 全栈开发框架
 
-基于 `.cursor/rules/*.mdc` 的 Spec 驱动开发：需求在 `docs/spec`，规则在 `.cursor/rules/`。
+## 项目由来与意义
 
-## 结构
+本项目的设计借鉴了 **OpenSpec** 的开发模式，针对 **Vibe Coding**（与 AI 对话式编程）中常见的问题做了专门优化：
+
+- **需求理解幻觉**：纯对话容易产生「你以为 AI 懂了、AI 以为你要的是别的」的偏差，导致实现与预期不符。
+- **任务与需求文档模糊**：没有成文的需求时，AI 容易在长对话中遗忘或曲解早期约定，幻觉被不断放大。
+- **传统 Spec 的上下文挤占**：若把整份大 spec 塞进对话，会挤占 Cursor 的上下文窗口，影响后续实现与检索效率。
+
+本框架将 **Spec 流程以 Cursor Rules + Skills 的方式集成**：需求落在轻量的 `docs/spec` 文档中，**何时走 Spec、如何归档**由规则与技能驱动，AI 按「先录需求再实现」执行，无需你背诵流程。这样既保留了「需求成文、可追溯、可归档」的好处，又避免了「大文档占满上下文」的问题。同时项目内提供 **API 风格、领域命名、测试最佳实践** 等多项 Skill 与检查清单，便于 AI 与人类协同时保持风格一致、减少返工。
+
+简单了解项目后，即可在 Cursor 中实现 **Spec 驱动 + AI 提效** 的最佳实践，适合作为团队或个人在 Cursor 中进行规范开发的起点。
+
+---
+
+## 快速理解：项目架构与 Spec 流程
+
+### 项目基本架构（逻辑关系）
+
+```
+                    ┌─────────────────────────────────────────────────────────┐
+                    │                     Cursor  IDE / 你                      │
+                    └───────────────────────────┬───────────────────────────────┘
+                                                │
+            ┌───────────────────────────────────┼───────────────────────────────────┐
+            ▼                                   ▼                                   ▼
+   ┌─────────────────┐               ┌─────────────────┐               ┌─────────────────┐
+   │ .cursor/rules/  │               │ .cursor/skills/ │               │   docs/spec/    │
+   │ 何时走 Spec、   │               │ API 风格、      │               │ 需求写在这里    │
+   │ 如何归档、      │◄──────────────│ 命名规范、      │──────────────►│ active / archive│
+   │ 后端/前端规范   │  按需触发      │ 测试最佳实践等  │  读写、归档    │ / specs(真相源)  │
+   └────────┬────────┘               └─────────────────┘               └────────┬────────┘
+            │                                                                   │
+            │ 驱动实现、校验、归档                                                │ 实现需与 spec 一致
+            ▼                                                                   ▼
+   ┌─────────────────────────────────────────────────────────────────────────────────┐
+   │  backend/ (FastAPI + Pydantic)     │     frontend/ (Next.js + shadcn/ui)        │
+   └─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+- **规则 (rules)**：决定「新功能/改需求」时自动走 Spec、归档时做校验与合并；后端/前端各有代码规范。
+- **技能 (skills)**：在改 API、命名、写测试时提供统一约定，减少风格分裂。
+- **docs/spec**：`active/` 进行中需求，`archive/` 已归档，`specs/` 为当前系统的「单一事实来源」，归档时把 delta 合并进去。
+
+### Spec 工作流程（一句话 + 示意）
+
+**一句话**：你说「加/改功能」→ AI 先写/更新 `docs/spec/active/` 里的需求 → 再按该需求实现代码；你说「归档」→ AI 做「实现 vs spec」校验 → 把变更合并进 `specs/<领域>/` 并移入 `archive/`。
+
+```
+  你：「加一个 xxx 功能」 / 「把 xxx 改成 yyy」
+                    │
+                    ▼
+  ┌─────────────────────────────────────┐
+  │ spec_trigger 识别为「新功能/改需求」 │
+  └─────────────────┬───────────────────┘
+                    │
+                    ▼
+  ┌─────────────────────────────────────┐
+  │ 在 docs/spec/active/ 新增或更新 spec │  ← 先录需求，再写代码
+  └─────────────────┬───────────────────┘
+                    │
+                    ▼
+  ┌─────────────────────────────────────┐
+  │ 按 spec 实现 backend / frontend      │  ← 开发清单可辅助核对
+  └─────────────────┬───────────────────┘
+                    │
+  你：「归档」/「开发完成」
+                    │
+                    ▼
+  ┌─────────────────────────────────────┐
+  │ 归档检查列表：校验 → 合并 delta       │
+  │ → 移入 archive，清理临时文档         │
+  └─────────────────────────────────────┘
+```
+
+修 Bug、提问、纯讨论设计**不会**触发上述流程，直接按你的问题响应。
+
+---
+
+## 目录结构
 
 - `backend/` — FastAPI，Pydantic v2，统一响应，依赖注入
 - `frontend/` — Next.js 14 + shadcn/ui，响应式，Loading/Error 完备
-- `docs/spec/active/` — 活跃需求（提案/实现）
-- `docs/spec/archive/` — 已归档
-- `.cursor/rules/` — 五个 .mdc 规则（spec_trigger、spec_manager、fastapi_shield、frontend_architect、global_guard）
+- `docs/spec/active/` — 进行中的需求（提案或实现中）
+- `docs/spec/archive/` — 已归档需求（仅历史）
+- `docs/spec/specs/` — **Source of Truth**，按领域一份「当前系统」规格
+- `docs/spec_process/` — 流程说明、开发/归档检查清单、测试最佳实践等
+- `.cursor/rules/` — 五条规则：`spec_trigger`、`spec_manager`、`fastapi_shield`、`frontend_architect`、`global_guard`
+- `.cursor/skills/` — 项目技能：API 与 Pydantic 风格、领域命名规范等
 
 ## 本地运行
 
@@ -26,11 +105,9 @@ cd frontend && npm i && npm run dev
 
 ## 如何用 Spec 驱动开发
 
-**无需记流程**：你只要说「加一个 xxx 功能」或「把 xxx 改成 yyy」，AI 会**自动**走 Spec 流程（先录需求到 `docs/spec/active/`，再实现）。修 Bug、提问、讨论设计不会触发，直接响应。
+- **会触发 Spec 流程**：新功能、修改既有功能/行为（例如「加一个登录」「把列表改成支持分页」）。
+- **不触发**：修 Bug、提问解释、设计/流程讨论、纯重构或修 lint。
 
-- **会触发**：新功能、修改既有功能/行为。
-- **不触发**：修 Bug、提问解释、设计/流程讨论、纯重构/修 lint。
+规则说明：`spec_trigger.mdc`（始终生效）根据你的意图决定是否走 Spec；只有当你明确说「归档」「开发完成」等时才会执行归档；`spec_manager.mdc` 定义归档六步与 spec 规则；`fastapi_shield` / `frontend_architect` 在改对应代码时生效。
 
-规则说明：`spec_trigger.mdc`（始终生效）根据意图决定是否走 spec；归档仅响应用户明确说的「归档」「开发完成」等；`spec_manager.mdc` 定义归档六步与 spec 规则；`fastapi_shield` / `frontend_architect` 在改对应代码时生效。
-
-**Cursor Skills 与 MCP**：推荐清单见 [docs/cursor_skills_and_mcp.md](docs/cursor_skills_and_mcp.md)。一键安装：运行 `scripts/install_skills_win.ps1` 与 `scripts/install_mcp_win.ps1`（Windows）或 `scripts/install_skills_mac_linux.sh`、`scripts/install_mcp_mac_linux.sh`（Mac/Linux），详见 [scripts/README.md](scripts/README.md)。
+**Cursor Skills 与 MCP**：推荐清单见 [docs/cursor_skills_and_mcp.md](docs/cursor_skills_and_mcp.md)。一键安装脚本见 `scripts/skills_and_mcps/`，详见其内 [README.md](scripts/skills_and_mcps/README.md)。
