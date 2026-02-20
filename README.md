@@ -79,7 +79,7 @@
 
 你也可以在对话时先让其生曾需求和设计文档，待自己检查了 docs/spec/active 下生成的需求文件无误后再要求ai根据文档开发
 
-**注意：** 暂未设计出好的归档流程，当一个需求开发完毕后，要主动要求ai帮忙**归档**，可以清理需求开发过程中的中间文档以及将新功能写入项目文档中，否则你的开发中任务会越来越多，不利于管理
+**注意：** 暂未设计出好的归档流程，当一个需求开发完毕后，要**主动说「归档」或「开发完成」**，让 AI 执行归档（校验 → 合并 delta → 移入 archive → 清理）。否则 `docs/spec/active/` 会越积越多，不利于管理。
 
 ---
 
@@ -91,8 +91,10 @@
 - `docs/spec/archive/` — 已归档需求（仅历史）
 - `docs/spec/specs/` — **Source of Truth**，按领域一份「当前系统」规格
 - `docs/spec_process/` — 流程说明、开发/归档检查清单、测试最佳实践等
-- `.cursor/rules/` — 五条规则：`spec_trigger`、`spec_manager`、`fastapi_shield`、`frontend_architect`、`global_guard`
-- `.cursor/skills/framework/` — 框架技能（API 与 Pydantic 风格、领域命名规范等）；项目专属技能可放 `.cursor/skills/` 其他子目录
+- `.cursor/rules/` — 五条**框架规则**（spec_trigger、spec_manager、global_guard、fastapi_shield、frontend_architect），建议保留；项目专属规则可新增其他 `.mdc` 文件。
+- `.cursor/skills/framework/` — 框架技能（API 与 Pydantic 风格、领域命名规范等）；项目专属技能可放 `.cursor/skills/` 其他子目录。
+
+更多「框架 vs 项目」可能冲突及对策见 [docs/spec_process/FRAMEWORK_AND_PROJECT_CONFLICTS.md](docs/spec_process/FRAMEWORK_AND_PROJECT_CONFLICTS.md)。
 
 # 技术栈
 项目以python后端和Next.js 14 + shadcn/ui前端技术栈为例，项目中和推荐安装脚本中的skill也是针对这两个技术栈的

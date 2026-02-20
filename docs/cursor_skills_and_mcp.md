@@ -80,7 +80,7 @@
   },
   "filesystem": {
     "command": "npx",
-    "args": ["-y", "@modelcontextprotocol/server-filesystem", "d:\\code\\spec_coding"]
+    "args": ["-y", "@modelcontextprotocol/server-filesystem", "C:\\path\\to\\your\\project\\root"]
   },
   "fetch": {
     "command": "npx",
@@ -89,7 +89,7 @@
 }
 ```
 
-- **filesystem**：限定到项目目录，便于 Agent 安全读写项目文件。
+- **filesystem**：限定到项目目录，便于 Agent 安全读写项目文件。**请将上面示例中的 `C:\\path\\to\\your\\project\\root` 改为你当前打开的项目根目录的绝对路径**（如 `d:\\code\\my_project`），否则 MCP 会指向错误目录；从本框架克隆新项目后务必在用户级 `mcp.json` 中修改此处。
 - **fetch**：拉取 HTTP 文档/API 说明，便于对齐对外交互格式。
 
 更多见 [Cursor MCP Directory](https://cursor.com/docs/context/mcp/directory)。

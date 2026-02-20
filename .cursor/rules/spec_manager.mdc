@@ -53,7 +53,7 @@ alwaysApply: false
 1. **确定对象**：用户指定的 active 项，或当前对话涉及 / 最近在做的 active 项；若多个则列出让用户选一个。
 2. **归档前校验**：列出该 spec 的接口/场景/约定，逐项检查 backend/frontend 是否有对应实现且行为一致；不一致则先改 spec 或代码再继续。
 3. **完善文档**（推荐）：补充该需求对应的**接口文档**（如 FastAPI 路由的 docstring、请求/响应说明，或 OpenAPI 描述）与必要时**使用说明**（如 README 小节、调用示例）；可写在代码旁或 `docs/` 下与领域对应的位置。
-4. **合并 delta**：按 ADDED/MODIFIED/REMOVED 将变更合并进 `specs/<领域>/spec.md`；无对应领域文件则新建。
+4. **合并 delta**：按 ADDED/MODIFIED/REMOVED 将变更合并进 `specs/<领域>/spec.md`；无对应领域文件则新建。**若多个 active 涉及同一 `specs/<领域>/spec.md`**，按完成顺序或用户指定顺序依次合并，避免互相覆盖。
 5. **移入 archive**：将该项从 `docs/spec/active/` 移入 `docs/spec/archive/`（可带日期与下划线名称，如 `archive/2025-02-07_spec_list_api/` 便于追溯）。
 6. **归档清理**：将该变更专属的临时文档移入其 archive 目录或删除，不在 active 或 spec 根目录遗留。
 
@@ -65,3 +65,4 @@ alwaysApply: false
 - **用户明确说「归档」或「开发完成」等时**：按上文「归档流程」六步执行（确定对象 → 校验 → 完善文档 → 合并 delta → 移入 archive → 清理）。
 - 修改 `docs/spec/**` 时：据此同步修改 backend/frontend。
 - 需求不清晰时：先与 AI 做一轮探索（现有实现、可选方案、范围），再创建或修改 active spec。
+- **需求取消**：若某 active 决定不做了，可将该变更移入 archive 并命名为 `archive/YYYY-MM-DD_<name>_cancelled` 或在 spec 文首标 `status: cancelled` 并简短注明原因；也可直接删除该 active 文件/目录（若不需要留痕）。
