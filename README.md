@@ -7,6 +7,7 @@
 - **需求理解幻觉**：纯对话容易产生「你以为 AI 懂了、AI 以为你要的是别的」的偏差，导致实现与预期不符。
 - **任务与需求文档模糊**：没有成文的需求时，AI 容易在长对话中遗忘或曲解早期约定，幻觉被不断放大。
 - **传统 Spec 的上下文挤占**：若把整份大 spec 塞进对话，会挤占 Cursor 的上下文窗口，影响后续实现与检索效率。
+- **流程及文档汉化**： 避免中文开发者需要处理大量应为流程和需求文档
 
 本框架将 **Spec 流程以 Cursor Rules + Skills 的方式集成**：需求落在轻量的 `docs/spec` 文档中，**何时走 Spec、如何归档**由规则与技能驱动，AI 按「先录需求再实现」执行，无需你背诵流程。这样既保留了「需求成文、可追溯、可归档」的好处，又避免了「大文档占满上下文」的问题。同时项目内提供 **API 风格、领域命名、测试最佳实践** 等多项 Skill 与检查清单，便于 AI 与人类协同时保持风格一致、减少返工。
 
@@ -27,7 +28,7 @@
             ▼                                   ▼                                   ▼
    ┌─────────────────┐               ┌─────────────────┐               ┌─────────────────┐
    │ .cursor/rules/  │               │ .cursor/skills/ │               │   docs/spec/    │
-   │ 何时走 Spec、   │               │ API 风格、      │               │ 需求写在这里    │
+   │ 何时走 Spec、   │               │ framework/ 与   │               │ 需求写在这里    │
    │ 如何归档、      │◄──────────────│ 命名规范、      │──────────────►│ active / archive│
    │ 后端/前端规范   │  按需触发      │ 测试最佳实践等  │  读写、归档    │ / specs(真相源)  │
    └────────┬────────┘               └─────────────────┘               └────────┬────────┘
@@ -40,7 +41,7 @@
 ```
 
 - **规则 (rules)**：决定「新功能/改需求」时自动走 Spec、归档时做校验与合并；后端/前端各有代码规范。
-- **技能 (skills)**：在改 API、命名、写测试时提供统一约定，减少风格分裂。
+- **技能 (skills)**：框架技能在 `.cursor/skills/framework/`，项目专属技能可放 `.cursor/skills/` 其他子目录；在改 API、命名、写测试时提供统一约定。
 - **docs/spec**：`active/` 进行中需求，`archive/` 已归档，`specs/` 为当前系统的「单一事实来源」，归档时把 delta 合并进去。
 
 ### Spec 工作流程
@@ -91,11 +92,11 @@
 - `docs/spec/specs/` — **Source of Truth**，按领域一份「当前系统」规格
 - `docs/spec_process/` — 流程说明、开发/归档检查清单、测试最佳实践等
 - `.cursor/rules/` — 五条规则：`spec_trigger`、`spec_manager`、`fastapi_shield`、`frontend_architect`、`global_guard`
-- `.cursor/skills/` — 项目技能：API 与 Pydantic 风格、领域命名规范等
+- `.cursor/skills/framework/` — 框架技能（API 与 Pydantic 风格、领域命名规范等）；项目专属技能可放 `.cursor/skills/` 其他子目录
 
 # 技术栈
-项目以python后端和Next.js 14 + shadcn/ui前端技术栈为例，配备的skill也是针对这两个技术栈的
-如果使用其他技术栈，只需要让ai帮忙替换掉对应的skill即可
+项目以python后端和Next.js 14 + shadcn/ui前端技术栈为例，项目中和推荐安装脚本中的skill也是针对这两个技术栈的
+如果使用其他技术栈，只需要让ai帮忙替换掉对应技术栈的skill即可
 
 
 **后端 Lint / 类型检查**（可选）：`pip install -r requirements_dev.txt` 后执行 `ruff check .`、`ruff format --check .`、`pyright`。
@@ -109,4 +110,4 @@
 
 规则说明：`spec_trigger.mdc`（始终生效）根据你的意图决定是否走 Spec；只有当你明确说「归档」「开发完成」等时才会执行归档；`spec_manager.mdc` 定义归档六步与 spec 规则；`fastapi_shield` / `frontend_architect` 在改对应代码时生效。
 
-**Cursor Skills 与 MCP**：推荐清单见 [docs/cursor_skills_and_mcp.md](docs/cursor_skills_and_mcp.md)。一键安装脚本见 `scripts/skills_and_mcps/`，详见其内 [README.md](scripts/skills_and_mcps/README.md)。
+**Cursor Skills 与 MCP 推荐安装**：推荐清单见 [docs/cursor_skills_and_mcp.md](docs/cursor_skills_and_mcp.md)。一键安装脚本见 `scripts/skills_and_mcps/`，详见其内 [README.md](scripts/skills_and_mcps/README.md)。
