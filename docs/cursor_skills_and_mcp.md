@@ -7,7 +7,7 @@
 ## 一、已具备的 Cursor 能力
 
 - **Rules**（`.cursor/rules/*.mdc`）：`spec_trigger`、`spec_manager`、`fastapi_shield`、`frontend_architect`、`global_guard`
-- **Skills 目录**：用户级 `~/.cursor/skills/`；项目级 `.cursor/skills/`（本仓库框架技能在 `.cursor/skills/framework/`，项目专属 skill 可放同级其他子目录）
+- **Skills 目录**：用户级 `~/.cursor/skills/`；项目级 `.cursor/skills/`（本仓库可放项目专属 skill）
 - **MCP**：通过 Cursor 设置添加，或用户级 `%USERPROFILE%\.cursor\mcp.json`（Windows）
 
 ---
@@ -27,8 +27,8 @@
 
 | 用途 | 建议 | 安装方式 |
 |------|------|----------|
-| **Pydantic / API 一致性** | 使用本框架自带的 **框架 Skill** | 已放在 `.cursor/skills/framework/api_pydantic_style/`，自动加载 |
-| **领域 / Spec 命名规范** | spec 与领域相关文件名、目录名统一使用**下划线** | 已放在 `.cursor/skills/framework/domain_naming_convention/`，自动加载 |
+| **Pydantic / API 一致性** | 使用本项目自带的 **项目 Skill** | 已放在 `.cursor/skills/api_pydantic_style/`，自动加载 |
+| **领域 / Spec 命名规范** | spec 与领域相关文件名、目录名统一使用**下划线** | 已放在 `.cursor/skills/domain_naming_convention/`，自动加载 |
 | **代码规范 / Lint** | 本仓库 backend 使用 **ruff + pyright** | 见下方「后端 Lint 与类型检查」 |
 | **规则与规范** | 需要新规则时用 `/create-rule` | 在 Agent 里输入 `/create-rule` 按提示操作 |
 | **新 Skill** | 需要新 Skill 时用 `/create-skill` | 在 Agent 里输入 `/create-skill` 按提示操作 |
@@ -114,17 +114,17 @@ pyright
 
 配置见：`backend/pyproject.toml`（含 Ruff 与 Pyright）。开发依赖：`pip install -r requirements_dev.txt`。
 
-### 4.2 框架 Skill：API 与 Pydantic 风格
+### 4.2 项目级 Skill：API 与 Pydantic 风格
 
-- 路径：`.cursor/skills/framework/api_pydantic_style/`
+- 路径：`.cursor/skills/api_pydantic_style/`
 - 作用：在实现或修改接口时，提醒 Agent 使用 `ApiResponse[T]`、Pydantic v2 模型、类型完整、与 `app/core/response.py` 一致。与现有 `fastapi_shield.mdc` 互补。
 
-### 4.3 框架 Skill：领域命名规范
+### 4.3 项目级 Skill：领域命名规范
 
-- 路径：`.cursor/skills/framework/domain_naming_convention/`
+- 路径：`.cursor/skills/domain_naming_convention/`
 - 作用：spec 与领域相关文件名、目录名一律使用**下划线**（如 `spec_list_api.md`、`specs/spec_list/`），禁止中划线。新建或重命名 spec、归档目录及编写命名约定时自动遵循。
 
-框架技能由 Cursor 自动从 `.cursor/skills/`（含 `framework/` 子目录）发现，无需额外安装。项目专属技能可放在 `.cursor/skills/` 下其他子目录（如按领域命名），与框架技能区分。
+由 Cursor 自动从 `.cursor/skills/` 发现，无需额外安装。
 
 ---
 
@@ -145,7 +145,7 @@ MCP **不需要**每次开机单独运行——Cursor 会在使用时按需启�
 1. **看现有 Skills**：Cursor 设置 → Rules → 查看「Agent Decides」中的 Skills。
 2. **加 MCP**：设置 → MCP → 添加，或编辑 `%USERPROFILE%\.cursor\mcp.json`；或直接运行上述安装脚本。
 3. **后端 lint**：在 `backend/` 执行 `ruff check .`、`ruff format --check .`、`pyright`（或使用 VS Code/Cursor 的 Ruff、Pyright 扩展）。
-4. **用框架 / 项目 Skill**：Agent 中可输入 `/api_pydantic_style`、`/domain_naming_convention` 显式调用，或由 Agent 在改 API、建 spec/归档时自动选用。
+4. **用项目 Skill**：Agent 中可输入 `/api_pydantic_style`、`/domain_naming_convention` 显式调用，或由 Agent 在改 API、建 spec/归档时自动选用。
 
 ---
 

@@ -20,7 +20,7 @@ alwaysApply: false
 
 - **active/**：进行中的变更（单文件或单目录均可）。
 - **archive/**：已结束的变更，仅历史；不再驱动开发。
-- **specs/**：Source of Truth。按领域分目录（如 `specs/auth/`、`specs/spec_list/`），每领域一份 `spec.md` 描述**当前系统**已合入的行为与约定。归档时必须把本次变更按 delta 合并进对应 `specs/<领域>/spec.md`。领域名与 spec 文件名一律使用**下划线**，见 `docs/spec_process/` 及框架 Skill `domain_naming_convention`（`.cursor/skills/framework/domain_naming_convention/`）。
+- **specs/**：Source of Truth。按领域分目录（如 `specs/auth/`、`specs/spec_list/`），每领域一份 `spec.md` 描述**当前系统**已合入的行为与约定。归档时必须把本次变更按 delta 合并进对应 `specs/<领域>/spec.md`。领域名与 spec 文件名一律使用**下划线**，见 `docs/spec_process/` 及项目 Skill `domain_naming_convention`（`.cursor/skills/domain_naming_convention/SKILL.md`）。
 
 ## Delta 语义（借鉴 OpenSpec）
 
@@ -40,7 +40,7 @@ alwaysApply: false
 
 1. **门禁**：任何非 Bug 的功能/接口/UI/数据模型变更，必须先在此目录下新增或修改对应 spec，再写 backend/frontend 代码。
 2. **格式**：文首一行 `status: proposal | implementation`；内容极简；若需可追溯合并，使用 ADDED/MODIFIED/REMOVED 标记。
-3. **命名**：`{领域}_{简短描述}.md` 或目录 `{领域}_{描述}/`，如 `auth_login.md`、`spec_list_api.md`。一律使用**下划线**，禁止中划线；详见 `.cursor/skills/framework/domain_naming_convention/SKILL.md`。
+3. **命名**：`{领域}_{简短描述}.md` 或目录 `{领域}_{描述}/`，如 `auth_login.md`、`spec_list_api.md`。一律使用**下划线**，禁止中划线；详见 `.cursor/skills/domain_naming_convention/SKILL.md`。
 4. **实现完成定义**：该 spec 中列出的接口/场景/约定在代码中均有对应且行为一致；**开发时须按 `docs/spec_process/CHECKLISTS.md` 中的「开发清单列表」逐项核对**，可选在 spec 或同目录 `tasks.md` 中列子项并勾选。
 5. **提出新需求时**：先列出 `docs/spec/active/` 下现有项，避免重复或冲突，再创建或修改 spec。
 6. **归档前校验**：将某需求归档前，必须先执行一次「实现 vs spec」校验：列出该 spec 涉及的任务/接口/场景，检查 backend/frontend 是否有对应实现与行为；不一致则先改 spec 或代码再归档。

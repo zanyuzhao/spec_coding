@@ -28,7 +28,7 @@
             ▼                                   ▼                                   ▼
    ┌─────────────────┐               ┌─────────────────┐               ┌─────────────────┐
    │ .cursor/rules/  │               │ .cursor/skills/ │               │   docs/spec/    │
-   │ 何时走 Spec、   │               │ framework/ 与   │               │ 需求写在这里    │
+   │ 何时走 Spec、   │               │ API 风格、      │               │ 需求写在这里    │
    │ 如何归档、      │◄──────────────│ 命名规范、      │──────────────►│ active / archive│
    │ 后端/前端规范   │  按需触发      │ 测试最佳实践等  │  读写、归档    │ / specs(真相源)  │
    └────────┬────────┘               └─────────────────┘               └────────┬────────┘
@@ -41,7 +41,7 @@
 ```
 
 - **规则 (rules)**：决定「新功能/改需求」时自动走 Spec、归档时做校验与合并；后端/前端各有代码规范。
-- **技能 (skills)**：框架技能在 `.cursor/skills/framework/`，项目专属技能可放 `.cursor/skills/` 其他子目录；在改 API、命名、写测试时提供统一约定。
+- **技能 (skills)**：在改 API、命名、写测试时提供统一约定；框架技能在 `.cursor/skills/`（如 `api_pydantic_style`、`domain_naming_convention`），项目专属技能可放同级其他子目录。
 - **docs/spec**：`active/` 进行中需求，`archive/` 已归档，`specs/` 为当前系统的「单一事实来源」，归档时把 delta 合并进去。
 
 ### Spec 工作流程
@@ -92,7 +92,7 @@
 - `docs/spec/specs/` — **Source of Truth**，按领域一份「当前系统」规格
 - `docs/spec_process/` — 流程说明、开发/归档检查清单、测试最佳实践等
 - `.cursor/rules/` — 五条**框架规则**（spec_trigger、spec_manager、global_guard、fastapi_shield、frontend_architect），建议保留；项目专属规则可新增其他 `.mdc` 文件。
-- `.cursor/skills/framework/` — 框架技能（API 与 Pydantic 风格、领域命名规范等）；项目专属技能可放 `.cursor/skills/` 其他子目录。
+- `.cursor/skills/` — 项目技能：API 与 Pydantic 风格、领域命名规范等
 
 更多「框架 vs 项目」可能冲突及对策见 [docs/spec_process/FRAMEWORK_AND_PROJECT_CONFLICTS.md](docs/spec_process/FRAMEWORK_AND_PROJECT_CONFLICTS.md)。
 

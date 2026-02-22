@@ -4,10 +4,9 @@
 
 ---
 
-## 一、已解决的冲突：Skills 路径
+## 一、Skills 路径约定
 
-- **问题**：框架技能与项目专属技能都放在 `.cursor/skills/` 根下，多项目或同仓多技能时易混、命名冲突。
-- **对策**：框架技能统一放入 `.cursor/skills/framework/`，项目专属技能放在 `.cursor/skills/` 下其他子目录（如按领域命名）。详见 README 与 [cursor_skills_and_mcp.md](../cursor_skills_and_mcp.md)。
+- **约定**：项目技能放在 `.cursor/skills/` 下，按子目录或命名区分（如 `api_pydantic_style`、`domain_naming_convention` 与项目专属子目录）。多项目或同仓多技能时注意命名不冲突。详见 README 与 [cursor_skills_and_mcp.md](../cursor_skills_and_mcp.md)。
 
 ---
 
@@ -45,7 +44,7 @@
 - **对策**：
   - 使用本框架时，尽量保持 `backend/`、`frontend/` 及后端包名 `app`；若必须改名，需同步修改：
     - `.cursor/rules/` 中对应规则的 `globs`（如改为 `server/**`）；
-    - `.cursor/skills/framework/api_pydantic_style/SKILL.md` 等中写死的 `backend/app/`、`app/core/` 等路径。
+    - `.cursor/skills/api_pydantic_style/SKILL.md` 等中写死的 `backend/app/`、`app/core/` 等路径。
   - 文档中已说明技术栈可替换，但目录与包名变更需人工同步规则与技能。
 
 ---
@@ -80,7 +79,7 @@
 
 | 资源           | 用户级（多项目共用）     | 项目级（本仓）                         |
 |----------------|--------------------------|----------------------------------------|
-| **Skills**     | `~/.cursor/skills/`      | `.cursor/skills/framework/` + 其他子目录 |
+| **Skills**     | `~/.cursor/skills/`      | `.cursor/skills/`（项目技能） |
 | **Rules**      | 一般不放在用户级         | `.cursor/rules/`                       |
 | **MCP 配置**   | `~/.cursor/mcp.json`     | 通常用用户级；filesystem 路径按项目设  |
 | **docs/spec**  | 无                       | `docs/spec/`（active、archive、specs） |
