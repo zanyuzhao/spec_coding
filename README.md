@@ -93,8 +93,18 @@
 - `docs/spec_process/` — 流程说明、开发/归档检查清单、测试最佳实践等
 - `.cursor/rules/` — 五条**框架规则**（spec_trigger、spec_manager、global_guard、fastapi_shield、frontend_architect），建议保留；项目专属规则可新增其他 `.mdc` 文件。
 - `.cursor/skills/` — 项目技能：API 与 Pydantic 风格、领域命名规范等
+- `spec_cli/` — **可安装 CLI**：在任意项目根执行 `spec-coding init` 即可接入本框架，无需复制整仓。详见 [spec_cli/README.md](spec_cli/README.md) 与 [docs/spec_process/INSTALLABLE_SPEC_FRAMEWORK.md](docs/spec_process/INSTALLABLE_SPEC_FRAMEWORK.md)。
 
 更多「框架 vs 项目」可能冲突及对策见 [docs/spec_process/FRAMEWORK_AND_PROJECT_CONFLICTS.md](docs/spec_process/FRAMEWORK_AND_PROJECT_CONFLICTS.md)。
+
+### 新项目 / 老项目如何接入（推荐：可安装方式）
+
+若希望**新项目**直接在项目根写业务（无多余 `backend/` 嵌套）、或**老项目**直接接入 Spec 流程，可不用「复制本仓再在 backend 里开发」：
+
+1. **安装 CLI**：在仓库根执行 `pip install -e .`，或 `cd spec_cli && pip install -e .`
+2. **在目标项目根目录执行**：`spec-coding init`（若后端/前端目录名或包名不同，可加 `--backend-dir`、`--frontend-dir`、`--app-package`）。
+
+接入后，该目录下会有 `docs/spec/`、`docs/spec_process/`、`.cursor/rules/`、`.cursor/skills/`，业务代码结构由你自定（可仍用 `backend/`、`frontend/`，也可用 `server/`、`web/` 等）。详见 [docs/spec_process/INSTALLABLE_SPEC_FRAMEWORK.md](docs/spec_process/INSTALLABLE_SPEC_FRAMEWORK.md)。
 
 # 技术栈
 项目以python后端和Next.js 14 + shadcn/ui前端技术栈为例，项目中和推荐安装脚本中的skill也是针对这两个技术栈的

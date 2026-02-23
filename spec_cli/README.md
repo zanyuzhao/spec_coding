@@ -1,0 +1,69 @@
+# spec-coding CLI
+
+在任意项目根目录初始化 Spec 驱动开发框架（`docs/spec`、`.cursor/rules`、`.cursor/skills`），无需复制本仓库。
+
+## 安装
+
+在**本仓库根目录**做可编辑安装（推荐）：
+
+```bash
+cd /path/to/spec_coding
+pip install -e .
+```
+
+或在 `spec_cli` 子目录下：
+
+```bash
+cd /path/to/spec_coding/spec_cli
+pip install -e .
+```
+
+将来若发布到 PyPI，可直接：
+
+```bash
+pip install spec-coding
+```
+
+## 使用
+
+在**你的项目根目录**下执行：
+
+```bash
+cd /path/to/your_project
+spec-coding init
+```
+
+将创建：
+
+- `docs/spec/`（active、archive、specs、README）
+- `docs/spec_process/`（流程说明、检查清单、最佳实践等）
+- `.cursor/rules/`（五条框架规则）
+- `.cursor/skills/`（api_pydantic_style、domain_naming_convention）
+
+### 自定义目录与包名
+
+若后端目录为 `server/`、前端为 `web/`、Python 包名为 `myapp`：
+
+```bash
+spec-coding init --backend-dir server --frontend-dir web --app-package myapp
+```
+
+### 仅初始化文档
+
+若只需 `docs/spec` 与 `docs/spec_process`，不写入 `.cursor`：
+
+```bash
+spec-coding init --docs-only
+```
+
+## 单一来源（仓库中只有一份）
+
+仓库里**只保留一份**规则、技能与流程文档：仓库根的 `.cursor/` 与 `docs/`。`templates/` 仅作临时用，用后即删，不提交、不常驻。
+
+- **安装**：`pip install -e .` 时会先生成 `templates/` 完成构建，**构建结束后立即删除** `templates/`，安装后仓库中不保留模板目录。
+- **init**：需要时从仓库根临时生成 `templates/`，复制到目标项目后**立即删除** `templates/`，保证代码中始终只有一套流程。
+- 从 sdist/PyPI 安装时，包内带打包好的 templates，不会在本地删除（因无法从仓库根重新生成）。
+
+## 设计说明
+
+详见仓库内 [docs/spec_process/INSTALLABLE_SPEC_FRAMEWORK.md](../docs/spec_process/INSTALLABLE_SPEC_FRAMEWORK.md)。

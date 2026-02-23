@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spec-coding"
+version = "0.1.0"
+description = "Spec-driven development framework for Cursor: init docs/spec, .cursor/rules, and .cursor/skills in any project"
+readme = "spec_cli/README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.4.0",
+]
+
+[project.scripts]
+spec-coding = "spec_cli.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["spec_cli"]
+include = ["spec_cli*"]
+
+[tool.setuptools.package-data]
+spec_cli = ["templates/**/*"]

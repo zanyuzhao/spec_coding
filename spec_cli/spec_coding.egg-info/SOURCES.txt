@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+setup.py
+spec_cli/README.md
+spec_cli/spec_cli/__init__.py
+spec_cli/spec_cli/__main__.py
+spec_cli/spec_cli/build_templates.py
+spec_cli/spec_cli/cli.py
+spec_cli/spec_coding.egg-info/PKG-INFO
+spec_cli/spec_coding.egg-info/SOURCES.txt
+spec_cli/spec_coding.egg-info/dependency_links.txt
+spec_cli/spec_coding.egg-info/entry_points.txt
+spec_cli/spec_coding.egg-info/requires.txt
+spec_cli/spec_coding.egg-info/top_level.txt
