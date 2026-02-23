@@ -7,3 +7,7 @@
 ## 状态
 
 每篇文首注明：`status: proposal | implementation`
+
+## 若用 Claude Code 自循环实现
+
+建议在 spec 中增加 **「验收」段**：列出可执行验收命令（如 `cd backend && pytest ...`、`cd frontend && npm run build`）。可选增加 **「任务拆分」段** 列出子任务。这样 Claude 可按「拆任务 → 逐项实现 → 跑验收 → 失败则修到过」自循环直到产出可运行、测试通过的功能。详见项目根目录 `CLAUDE.md` 的「实现与验收（含自循环）」与「在 Claude 中如何用」。

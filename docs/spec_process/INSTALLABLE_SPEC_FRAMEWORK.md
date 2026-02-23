@@ -49,8 +49,10 @@ spec-coding init
 - `docs/spec_process/`（流程说明、检查清单、最佳实践等）
 - `.cursor/rules/`（spec_trigger、spec_manager、global_guard、fastapi_shield、frontend_architect）
 - `.cursor/skills/`（api_pydantic_style、domain_naming_convention，可选）
+- `.claude/rules/`（与 Cursor 规则等价的 Claude Code 规则，含 spec 触发、归档、自循环实现等）
+- `CLAUDE.md`（项目根，Claude Code 的项目说明与使用方式）
 
-**不会**创建 `backend/`、`frontend/`，你的业务代码结构自己定；规则中的路径会使用默认 `backend`、`frontend`、`app`，若与你实际不符，见 2.4。
+**不会**创建 `backend/`、`frontend/`，你的业务代码结构自己定；规则中的路径会使用默认 `backend`、`frontend`、`app`，若与你实际不符，见 2.4。**Cursor 与 Claude Code 均可使用**：同一套 spec 流程，init 后两种环境均可按「先出文档 → 确认 → 继续开发 → 归档」使用。
 
 ### 2.3 自定义目录与包名
 

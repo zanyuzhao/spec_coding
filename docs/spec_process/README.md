@@ -2,6 +2,7 @@
 
 本目录存放**与 spec 流程本身相关**的文档，而非具体业务需求。
 
+- **需求说明与设计文档模板**：[SPEC_DOC_TEMPLATE.md](./SPEC_DOC_TEMPLATE.md) — 新需求时产出文档的结构；产出后停止，待用户确认再说「继续开发」。
 - **开发清单与归档检查列表**：[CHECKLISTS.md](./CHECKLISTS.md) — 实现与归档时逐项核对。
 - **测试最佳实践**：[testing_best_practices.md](./testing_best_practices.md) — 测试策略、工具及可选性设计指南。
 - **框架与项目冲突**：[FRAMEWORK_AND_PROJECT_CONFLICTS.md](./FRAMEWORK_AND_PROJECT_CONFLICTS.md) — 开发中可能遇到的路径/规则/配置冲突及对策。

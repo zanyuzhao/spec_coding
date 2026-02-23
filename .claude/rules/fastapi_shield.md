@@ -1,0 +1,24 @@
+# FastAPI Shield
+
+适用于 **backend/** 下的代码。
+
+## 强制
+
+1. **类型**：禁止 `Any`；所有函数（含路由处理函数、依赖）必须有完整参数类型与返回类型。
+2. **响应**：所有 HTTP 接口统一使用 `ApiResponse[T]`（`app/core/response.py`），通过 `success(data)` / `fail(message)` 构造，禁止直接返回裸 dict 或 Pydantic 模型作为 JSON body。
+3. **校验与模型**：使用 Pydantic v2（`BaseModel`），请求体/响应体一律用模型类，禁止手写 dict。
+4. **依赖注入**：可复用逻辑（如 DB、当前用户）通过 `Depends(...)` 注入，不在路由内写死。
+
+## 约定
+
+- 路由按领域分文件放在 `app/api/`，在 `app/api/__init__.py` 中挂到主 router。
+- 公共依赖放在 `app/core/deps.py`。
+- 新接口先确认 `docs/spec/active/` 有对应 spec（非 Bug 变更）。
+
+## 示例
+
+```python
+@router.get("/list", response_model=ApiResponse[list[SpecItem]])
+def list_specs(dep: SomeDep = Depends(get_some_dep)) -> ApiResponse[list[SpecItem]]:
+    return success(service.list())
+```

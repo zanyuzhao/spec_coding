@@ -24,7 +24,7 @@ def _templates_dir() -> Path:
 
 
 def _to_placeholders(content: str) -> str:
-    """将仓库中的 backend/frontend/app 转为占位符（仅用于 .cursor 下的规则与技能）。"""
+    """将仓库中的 backend/frontend/app 转为占位符（用于 .cursor 与 .claude 下的规则、技能及 CLAUDE.md）。"""
     s = content.replace("backend", PLACEHOLDER_BACKEND)
     s = s.replace("frontend", PLACEHOLDER_FRONTEND)
     # 仅替换作为包名的 app：app/、app.，避免改到 application 等
@@ -92,6 +92,21 @@ def build() -> bool:
                 rel = f.relative_to(process_src)
                 dest_file = process_dst / rel
                 _copy_with_placeholders(f, dest_file, apply_placeholders=False)
+
+    # .claude/rules -> templates/claude/rules（替换占位符，供 Claude Code 使用）
+    claude_rules_src = repo / ".claude" / "rules"
+    claude_rules_dst = templates / "claude" / "rules"
+    if claude_rules_src.is_dir():
+        for f in claude_rules_src.rglob("*"):
+            if f.is_file():
+                rel = f.relative_to(claude_rules_src)
+                dest_file = claude_rules_dst / rel
+                _copy_with_placeholders(f, dest_file, apply_placeholders=True)
+
+    # CLAUDE.md -> templates/CLAUDE.md（替换占位符）
+    claude_md_src = repo / "CLAUDE.md"
+    if claude_md_src.is_file():
+        _copy_with_placeholders(claude_md_src, templates / "CLAUDE.md", apply_placeholders=True)
 
     print(f"已从 {repo} 生成 templates -> {templates}")
     return True

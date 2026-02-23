@@ -36,6 +36,8 @@ def _copy_templates(
             return True
         if not (templates / "docs" / "spec").is_dir():
             return True
+        if not (templates / "claude" / "rules").is_dir() and not (templates / "CLAUDE.md").is_file():
+            return True
         return False
 
     if _templates_need_build():
@@ -80,6 +82,17 @@ def _copy_templates(
         if src.is_dir():
             copy_tree(src, target_root / name, substitute_text=False)
 
+    # .claude/rules + CLAUDE.md（Claude Code 使用，始终注入，--docs-only 时也保留以便仅用 Claude 的项目可用）
+    claude_rules_src = templates / "claude" / "rules"
+    if claude_rules_src.is_dir():
+        claude_dest = target_root / ".claude" / "rules"
+        copy_tree(claude_rules_src, claude_dest, substitute_text=True)
+    claude_md_src = templates / "CLAUDE.md"
+    if claude_md_src.is_file():
+        content = claude_md_src.read_text(encoding="utf-8")
+        content = _substitute(content, backend_dir, frontend_dir, app_package)
+        write_file(target_root / "CLAUDE.md", content)
+
     if docs_only:
         return
 
@@ -118,11 +131,12 @@ def _cmd_init(args: argparse.Namespace) -> None:
         skip_skills=args.docs_only,  # docs_only 时不写 skills
     )
     print(f"已在 {target} 初始化 Spec 框架。")
+    print("  - docs/spec/ 与 docs/spec_process/")
+    print("  - .claude/rules/ 与 CLAUDE.md（Claude Code）")
     if not args.docs_only:
-        print("  - docs/spec/ 与 docs/spec_process/")
-        print("  - .cursor/rules/ 与 .cursor/skills/")
+        print("  - .cursor/rules/ 与 .cursor/skills/（Cursor）")
     else:
-        print("  - docs/spec/ 与 docs/spec_process/（仅文档）")
+        print("  - （仅文档 + Claude 规则，未写入 .cursor）")
     print("  （再次执行 init 会覆盖上述框架文件以更新）")
 
 
