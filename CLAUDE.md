@@ -68,5 +68,5 @@
 - 自循环实现流程：`.claude/rules/implementation_loop.md`。
 - Spec 触发、归档、Delta 语义：`spec_trigger.md`、`spec_manager.md`。
 - 全局与后端/前端代码规范：`global_guard.md`、`fastapi_shield.md`、`frontend_architect.md`。
-- 领域与 spec 命名（下划线）：`domain_naming_convention.md`。
-- API 与 Pydantic 风格：`api_pydantic_style.md`。
+- 领域与 spec 命名（下划线）：Skill `domain_naming_convention`（`.claude/skills/domain_naming_convention/SKILL.md`）。
+- API 与 Pydantic 风格：Skill `api_pydantic_style`（`.claude/skills/api_pydantic_style/SKILL.md`）。

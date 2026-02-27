@@ -47,12 +47,13 @@ spec-coding init
 
 - `docs/spec/`（active、archive、specs、README）
 - `docs/spec_process/`（流程说明、检查清单、最佳实践等）
-- `.cursor/rules/`（spec_trigger、spec_manager、global_guard、fastapi_shield、frontend_architect）
-- `.cursor/skills/`（api_pydantic_style、domain_naming_convention，可选）
-- `.claude/rules/`（与 Cursor 规则等价的 Claude Code 规则，含 spec 触发、归档、自循环实现等）
+- `.cursor/rules/`（spec_trigger、spec_manager、global_guard、fastapi_shield、frontend_architect、ecc_testing、ecc_security）
+- `.cursor/skills/`（spec_implementation_phase、harnesses_initializer、harnesses_coding_session、api_pydantic_style、domain_naming_convention 及 ECC skills，非 --docs-only 时）
+- `.claude/rules/`（与 Cursor 规则等价的 Claude Code 规则）
+- `.claude/skills/`（与 .cursor/skills 同源，供 Claude Code 使用，非 --docs-only 时）
 - `CLAUDE.md`（项目根，Claude Code 的项目说明与使用方式）
 
-**不会**创建 `backend/`、`frontend/`，你的业务代码结构自己定；规则中的路径会使用默认 `backend`、`frontend`、`app`，若与你实际不符，见 2.4。**Cursor 与 Claude Code 均可使用**：同一套 spec 流程，init 后两种环境均可按「先出文档 → 确认 → 继续开发 → 归档」使用。
+**不会**创建 `backend/`、`frontend/`，你的业务代码结构自己定；规则中的路径会使用默认 `backend`、`frontend`、`app`，若与你实际不符，见 2.4。**Cursor 与 Claude Code 能力一致**：init 后两种环境均可按「先出文档 → 确认 → 继续开发 → 归档」及 Spec/Harnesses 双模式使用。
 
 ### 2.3 自定义目录与包名
 
@@ -108,9 +109,9 @@ spec-coding create my_app --with-starter
 
 ## 五、单一来源（仓库中只有一份）
 
-**仓库里只保留一份**：规则、技能与流程文档仅存在于仓库根的 `.cursor/` 与 `docs/`。`spec_cli` 下的 `templates/` 已加入 `.gitignore`，不纳入版本控制；在 `pip install -e .` 或打 sdist/wheel 时由 `build_templates` 从仓库根生成（并写入占位符）。
+**仓库里只保留一份**：规则、技能与流程文档仅存在于仓库根的 `.cursor/`、`.claude/` 与 `docs/`。技能以 `.cursor/skills` 为编辑源，`.claude/skills` 为副本供 Claude Code；修改技能后需同步到 `.claude/skills`（如 `cp -r .cursor/skills .claude/`）。`spec_cli` 下的 `templates/` 由 `build_templates` 从仓库根生成（占位符替换）；生成时 `.cursor/skills` 会同时输出到 `templates/cursor/skills` 与 `templates/claude/skills`，init 后 Cursor 与 Claude Code 能力一致。
 
-- 修改规则/技能/流程时只改仓库根 `.cursor` 与 `docs`，无需也不应改 `spec_cli/templates/`。
+- 修改规则/技能/流程时只改仓库根 `.cursor`、`.claude/rules` 与 `docs`，无需也不应改 `spec_cli/templates/`。
 - 安装（`pip install -e .`）与首次运行 `spec-coding init` 时会自动生成 `templates/`，无需手跑脚本。
 
 ## 六、模板与占位符

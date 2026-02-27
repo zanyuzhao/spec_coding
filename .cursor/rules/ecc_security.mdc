@@ -1,0 +1,32 @@
+---
+description: ECC 安全规范，提交前必查与秘密管理
+globs: backend/**/*.py,frontend/**/*.{ts,tsx},**/*.env*
+alwaysApply: false
+---
+
+# ECC Security（安全规范）
+
+## 提交前必查
+
+- [ ] 无硬编码秘密（API key、密码、token）
+- [ ] 所有用户输入已校验
+- [ ] SQL 注入防护（参数化查询）
+- [ ] XSS 防护（输出转义/ sanitized）
+- [ ] CSRF 防护已启用
+- [ ] 鉴权/授权已校验
+- [ ] 关键接口有限流
+- [ ] 错误信息不泄露敏感数据
+
+## 秘密管理
+
+- 禁止在源码中写死秘密，使用环境变量或密钥管理
+- 启动时校验必需秘密是否存在
+- 若秘密可能泄露，立即轮换并排查
+
+## 发现安全问题
+
+1. 立即停止相关改动
+2. 先修 CRITICAL，再继续
+3. 轮换已暴露秘密并全局排查类似问题
+
+与 `fastapi_shield`、`ecc_security_review` Skill 配合。

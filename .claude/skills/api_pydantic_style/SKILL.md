@@ -1,3 +1,8 @@
+---
+name: api_pydantic_style
+description: When implementing or changing backend API routes, use the project's unified ApiResponse and Pydantic v2 models so data and external contract stay consistent.
+---
+
 # API 与 Pydantic 风格一致
 
 在实现或修改 **backend** 的 HTTP 接口时，必须与本项目的统一响应格式和 Pydantic 约定保持一致。
@@ -6,6 +11,7 @@
 
 - 新增或修改 `backend/app/api/` 下的路由。
 - 定义或修改请求体、响应体、查询参数。
+- 希望 AI 自动遵循 `ApiResponse[T]` 与 Pydantic v2 约定时，可显式输入 `/api_pydantic_style`。
 
 ## 强制约定
 
@@ -30,4 +36,4 @@ def list_specs(dep: str = Depends(get_placeholder_dep)) -> ApiResponse[list[Spec
     return success(service.list())
 ```
 
-与 `fastapi_shield.md` 一致。
+与本仓库规则 `fastapi_shield.mdc` 一致；本 Skill 用于在 Agent 改 API 时提供集中、可复用的上下文。
