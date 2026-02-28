@@ -9,12 +9,21 @@
 - F001: SQLite MCP 配置 ✅ [completed]
 - F002: Playwright MCP 配置 ✅ [completed]
 - F003: curl_test Skill ✅ [completed]
-- F004: git_operations Skill [pending]
+- F004: git_operations Skill ✅ [completed]
 - F005: init.sh 启动脚本 [pending]
 - F006: Harnesses 流程验证 [pending]
 - F007: 文档更新 [pending]
 
 ## 进度历史
+
+### 2026-02-28 - F004 完成
+- 创建 .claude/skills/git_operations/SKILL.md
+- 定义分支命名规范（feature/fix/refactor/docs/chore）
+- 定义 commit 消息格式（type(scope): subject）
+- 明确禁止自动 push，只能由人类执行
+- 定义标准工作流（新需求、修复 Bug）
+- 定义撤销操作和常用命令速查
+- Skill 已被 Claude Code 识别
 
 ### 2026-02-28 - F003 完成
 - 创建 .claude/skills/curl_test/SKILL.md

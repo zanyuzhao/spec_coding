@@ -48,7 +48,7 @@
         "明确禁止自动 push，只能由人类执行",
         "验证 skill 可被 Claude Code 识别和调用"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "F005",
