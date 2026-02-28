@@ -1,0 +1,48 @@
+# Claude Progress - 工具链与自动化建设
+
+## 项目信息
+- 项目名: spec_coding_toolchain
+- 模式: Harnesses
+- 初始化时间: 2026-02-28
+
+## Feature 总览
+- F001: Postgres/Database MCP 配置 [pending]
+- F002: Playwright MCP 配置 [pending]
+- F003: curl_test Skill [pending]
+- F004: git_operations Skill [pending]
+- F005: init.sh 启动脚本 [pending]
+- F006: Harnesses 流程验证 [pending]
+- F007: 文档更新 [pending]
+
+## 进度历史
+
+### 2026-02-28 - 初始化
+- 创建 docs/harnesses/ 目录
+- 创建 scope.md（高层目标与范围）
+- 创建 feature_list.json（7 个 feature）
+- 创建 init.sh（启动脚本）
+- 创建 claude-progress.txt（本文件）
+- 状态: 初始化完成，等待开始第一轮
+
+## 使用说明
+1. 每轮说「继续」或「下一轮」，AI 将执行 harnesses_coding_session
+2. 每轮完成一个 feature，通过 E2E 验收后标记 passes: true
+3. 所有 feature 完成后，进行最终验收
+
+## init.sh 用法
+```bash
+# 启动全部服务
+./docs/harnesses/init.sh
+
+# 仅启动后端
+./docs/harnesses/init.sh --backend-only
+
+# 仅启动前端
+./docs/harnesses/init.sh --frontend-only
+
+# 检查服务状态
+./docs/harnesses/init.sh --check
+```
+
+## 已知问题
+- (暂无)

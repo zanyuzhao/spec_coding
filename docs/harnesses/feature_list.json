@@ -1,0 +1,90 @@
+{
+  "project": "spec_coding_toolchain",
+  "description": "工具链与自动化建设：MCP 集成、Skills 封装、Harnesses 流程验证",
+  "features": [
+    {
+      "id": "F001",
+      "category": "mcp",
+      "description": "配置 Postgres/Database MCP 服务器",
+      "steps": [
+        "在 .claude/mcp.json 或 .cursor/mcp.json 中添加 postgres MCP 配置",
+        "验证 MCP 可连接到开发数据库",
+        "测试基本查询功能（如 SELECT 1）"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F002",
+      "category": "mcp",
+      "description": "配置 Playwright MCP 服务器",
+      "steps": [
+        "在 MCP 配置中添加 playwright MCP",
+        "验证 MCP 可启动浏览器",
+        "测试基本页面访问与截图功能"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F003",
+      "category": "skill",
+      "description": "创建 curl_test Skill - cURL 接口测试封装",
+      "steps": [
+        "创建 .claude/skills/curl_test/SKILL.md",
+        "定义常用 HTTP 请求模式（GET/POST/PUT/DELETE）",
+        "定义认证头、JSON body、响应断言等模板",
+        "验证 skill 可被 Claude Code 识别和调用"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F004",
+      "category": "skill",
+      "description": "创建 git_operations Skill - Git 操作封装",
+      "steps": [
+        "创建 .claude/skills/git_operations/SKILL.md",
+        "定义新需求开分支流程",
+        "定义 commit 规范与模板",
+        "明确禁止自动 push，只能由人类执行",
+        "验证 skill 可被 Claude Code 识别和调用"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F005",
+      "category": "harnesses",
+      "description": "创建 init.sh 启动脚本",
+      "steps": [
+        "创建 docs/harnesses/init.sh",
+        "支持启动 backend（FastAPI）",
+        "支持启动 frontend（Next.js）",
+        "添加健康检查（curl backend/frontend 健康端点）",
+        "验证脚本可执行且服务正常启动"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F006",
+      "category": "harnesses",
+      "description": "验证 Harnesses 流程完整性",
+      "steps": [
+        "验证 feature_list.json 结构正确",
+        "验证 claude-progress.txt 可正常读写",
+        "验证 init.sh 可正常启动服务",
+        "验证 harnesses_coding_session skill 可正确读取 feature list",
+        "创建验证脚本 docs/harnesses/verify_harnesses.sh"
+      ],
+      "passes": false
+    },
+    {
+      "id": "F007",
+      "category": "docs",
+      "description": "更新 CLAUDE.md 和 README.md",
+      "steps": [
+        "在 CLAUDE.md 中添加新 MCP 和 Skills 的使用说明",
+        "在 README.md 中更新工具链章节",
+        "确保文档与实际配置一致"
+      ],
+      "passes": false
+    }
+  ]
+}
