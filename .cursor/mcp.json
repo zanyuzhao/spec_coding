@@ -9,6 +9,11 @@
       "command": "/home/zane/.local/bin/uvx",
       "args": ["mcp-server-sqlite", "--db-path", "/home/zane/code/spec_coding/data/dev.db"],
       "description": "SQLite database for development (official MCP server)"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "description": "Playwright browser automation for E2E testing (Microsoft official)"
     }
   }
 }

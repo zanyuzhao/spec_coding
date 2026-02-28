@@ -7,7 +7,7 @@
 
 ## Feature 总览
 - F001: SQLite MCP 配置 ✅ [completed]
-- F002: Playwright MCP 配置 [pending]
+- F002: Playwright MCP 配置 ✅ [completed]
 - F003: curl_test Skill [pending]
 - F004: git_operations Skill [pending]
 - F005: init.sh 启动脚本 [pending]
@@ -15,6 +15,12 @@
 - F007: 文档更新 [pending]
 
 ## 进度历史
+
+### 2026-02-28 - F002 完成
+- 配置 Playwright MCP（@playwright/mcp@latest，Microsoft 官方）
+- 验证 Playwright MCP 可运行（npx -y @playwright/mcp@latest --help）
+- 更新 mcp_setup.md 添加 Playwright 使用说明
+- 可用工具：browser_navigate, browser_click, browser_type, browser_screenshot 等
 
 ### 2026-02-28 - F001 完成
 - 安装 uv/uvx 工具

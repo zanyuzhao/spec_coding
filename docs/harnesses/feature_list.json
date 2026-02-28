@@ -19,11 +19,11 @@
       "category": "mcp",
       "description": "配置 Playwright MCP 服务器",
       "steps": [
-        "在 MCP 配置中添加 playwright MCP",
-        "验证 MCP 可启动浏览器",
-        "测试基本页面访问与截图功能"
+        "在 .cursor/mcp.json 中添加 playwright MCP 配置",
+        "验证 npx @playwright/mcp@latest 可运行",
+        "更新 mcp_setup.md 文档添加 Playwright 说明"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "F003",
