@@ -1,5 +1,7 @@
 # MCP 服务器配置文档
 
+> 📋 快速概览见 [工具链详解](../toolchain.md)
+
 本文档记录 spec_coding 项目配置的所有 MCP 服务器。
 
 ## 已配置的 MCP 服务器
