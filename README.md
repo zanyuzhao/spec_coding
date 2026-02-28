@@ -57,14 +57,26 @@ docs/spec/
 
 归档时自动合并到 Source of Truth，长期维护不迷路。
 
-## 设计思路
+## 设计思路与权威来源
 
-本框架借鉴了两方面的精华：
+本框架整合了业界最佳实践，设计思路有据可依：
 
-1. **OpenSpec** — 需求成文、Delta 合并、Source of Truth
-2. **Effective Agents** — Feature list 驱动、增量实现、E2E 验收
+### 📚 核心借鉴
 
-核心理念：**先想清楚，再动手写代码**。
+| 来源 | 核心思想 | 本框架应用 |
+|------|---------|-----------|
+| [**OpenSpec**](https://github.com/specdb/openspec) | 需求成文、Delta 合并、Source of Truth | `docs/spec/` 目录结构、归档流程 |
+| [**Effective Agents**](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) | Feature list 驱动、增量实现、E2E 验收 | Plan-Auto 模式、每轮一个 feature |
+| [**Everything Claude Code**](https://github.com/affaan-m/everything-claude-code) | TDD 工作流、验证闭环、安全审查 | Skills 内置 plan/verify/tdd/review |
+
+### 🎯 核心理念
+
+> **先想清楚，再动手写代码**
+
+1. **Spec 驱动** — 需求先成文，AI 和人类对齐理解
+2. **增量交付** — 每次只做一个 feature，做完验收
+3. **可追溯** — 所有变更都有记录，归档时合并到 Source of Truth
+4. **自动化** — TDD、验收、安全检查由 Skills 自动执行
 
 ---
 
