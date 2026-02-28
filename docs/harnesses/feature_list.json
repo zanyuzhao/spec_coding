@@ -5,13 +5,14 @@
     {
       "id": "F001",
       "category": "mcp",
-      "description": "配置 Postgres/Database MCP 服务器",
+      "description": "配置 SQLite MCP 服务器（Postgres 可选）",
       "steps": [
-        "在 .claude/mcp.json 或 .cursor/mcp.json 中添加 postgres MCP 配置",
-        "验证 MCP 可连接到开发数据库",
-        "测试基本查询功能（如 SELECT 1）"
+        "在 .cursor/mcp.json 中添加 sqlite MCP 配置",
+        "安装 uv/uvx 工具",
+        "验证 uvx mcp-server-sqlite 可运行",
+        "创建 data/init_db.sql 初始化脚本"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "F002",

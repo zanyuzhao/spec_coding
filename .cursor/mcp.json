@@ -4,6 +4,11 @@
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-memory"],
       "description": "Persistent memory across sessions (optional)"
+    },
+    "sqlite": {
+      "command": "/home/zane/.local/bin/uvx",
+      "args": ["mcp-server-sqlite", "--db-path", "/home/zane/code/spec_coding/data/dev.db"],
+      "description": "SQLite database for development (official MCP server)"
     }
   }
 }

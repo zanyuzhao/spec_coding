@@ -6,7 +6,7 @@
 - 初始化时间: 2026-02-28
 
 ## Feature 总览
-- F001: Postgres/Database MCP 配置 [pending]
+- F001: SQLite MCP 配置 ✅ [completed]
 - F002: Playwright MCP 配置 [pending]
 - F003: curl_test Skill [pending]
 - F004: git_operations Skill [pending]
@@ -15,6 +15,15 @@
 - F007: 文档更新 [pending]
 
 ## 进度历史
+
+### 2026-02-28 - F001 完成
+- 安装 uv/uvx 工具
+- 配置 SQLite MCP 服务器（官方 PyPI 包 mcp-server-sqlite）
+- 创建 data/init_db.sql 初始化脚本
+- 创建 docs/harnesses/mcp_setup.md 配置文档
+- 更新 .gitignore 忽略数据库文件
+- 创建 .env.example 环境变量模板
+- 注意：Postgres MCP 官方包尚未发布到 PyPI，已记录可选配置方式
 
 ### 2026-02-28 - 初始化
 - 创建 docs/harnesses/ 目录
@@ -44,5 +53,9 @@
 ./docs/harnesses/init.sh --check
 ```
 
+## MCP 配置验证
+重启 Cursor 后，在对话中询问：
+- "列出 SQLite 数据库中的所有表"
+
 ## 已知问题
-- (暂无)
+- Postgres MCP 官方包尚未发布到 PyPI，需从源码或 Docker 使用

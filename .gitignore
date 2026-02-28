@@ -1,2 +1,11 @@
 # spec_cli 的 templates 由仓库根 .cursor 与 docs 在构建时生成，不提交
 spec_cli/spec_cli/templates/
+
+# Database files (MCP)
+data/*.db
+data/*.db-journal
+
+# Environment files
+.env
+.env.local
+.env.*.local
