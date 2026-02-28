@@ -85,7 +85,7 @@
 | **sqlite** | 数据库操作与查询 | 「列出 SQLite 数据库中的所有表」 |
 | **playwright** | 浏览器自动化、E2E 测试、截图 | 「用 Playwright 打开 example.com 并截图」 |
 
-详细配置见 `docs/harnesses/mcp_setup.md`。
+详细配置见 `docs/plan_auto/mcp_setup.md`。
 
 ### Skills
 
@@ -98,19 +98,19 @@
 
 ```bash
 # 启动全部服务
-./docs/harnesses/init.sh
+./docs/plan_auto/init.sh
 
 # 仅启动后端/前端
-./docs/harnesses/init.sh --backend-only
-./docs/harnesses/init.sh --frontend-only
+./docs/plan_auto/init.sh --backend-only
+./docs/plan_auto/init.sh --frontend-only
 
 # 检查服务状态
-./docs/harnesses/init.sh --check
+./docs/plan_auto/init.sh --check
 ```
 
 ### 验证脚本
 
 ```bash
-# 验证 Harnesses 流程完整性
-./docs/harnesses/verify_harnesses.sh
+# 验证 Plan-Auto 流程完整性
+./docs/plan_auto/verify_plan_auto.sh
 ```

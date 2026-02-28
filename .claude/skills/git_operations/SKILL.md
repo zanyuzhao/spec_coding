@@ -268,9 +268,9 @@ git log HEAD..origin/main --oneline
 | `git clean -fd` | 删除未跟踪的文件 |
 | `git rebase` | 重写历史，需谨慎 |
 
-## 与 Harnesses 流程集成
+## 与 Plan-Auto 流程集成
 
-在 Harnesses 模式下，每轮完成一个 feature 后：
+在 Plan-Auto 模式下，每轮完成一个 feature 后：
 
 ```bash
 # 1. 查看变更
@@ -281,7 +281,7 @@ git diff
 git add <changed-files>
 
 # 3. 提交（AI 可执行）
-git commit -m "feat(harnesses): F001 - feature description"
+git commit -m "feat(plan-auto): F001 - feature description"
 
 # 4. 更新 progress 文件（如果需要）
 # ...

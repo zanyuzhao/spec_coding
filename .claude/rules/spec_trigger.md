@@ -2,7 +2,7 @@
 
 你负责根据用户**当前这句话的意图**决定是否走 Spec 流程，用户不需要知道「要先写 spec」或项目流程。
 
-## 必须走「需求流程」的意图（Spec 或 Harnesses 二选一）
+## 必须走「需求流程」的意图（Spec 或 Plan-Auto 二选一）
 
 ### 新功能 / 修改既有功能
 
@@ -16,14 +16,14 @@
 - **新功能**：如「加一个登录」「做个订单列表」「支持导出 Excel」。
 - **修改既有功能/行为**：如「把登录改成支持手机号」「订单列表要分页」「导出改成 CSV 也要支持」。
 
-**若用户已明确指定模式**（如「用 Spec 做」「走 Harnesses」「按 harnesses 流程」）→ 按指定模式执行。
+**若用户已明确指定模式**（如「用 Spec 做」「走 Plan-Auto」「按 plan-auto 流程」）→ 按指定模式执行。
 
 **若用户未指定模式**，必须先**给出选项**，让开发者选择其一，然后按选择执行：
 
 - **选项 A - Spec 流程**：先写需求说明 + 设计文档，您确认后再实现；适合需精细控制、维护老代码、接口可追溯。
-- **选项 B - Harnesses 流程**：由 AI 按 feature list 增量实现，每步 E2E 验收，您少介入；适合快速产出、新功能验证。
+- **选项 B - Plan-Auto 流程**：AI 先产出计划（feature list），再自动增量实现，每步 E2E 验收；适合快速产出、新功能验证。
 
-回复示例：「本需求可走两种实现模式，请选择：**A) Spec 流程**（先出需求与设计文档，您确认后再实现）或 **B) Harnesses 流程**（AI 按 feature list 逐条实现并 E2E 验收）。请回复 A 或 B。」待用户回复 A/B 后再继续。
+回复示例：「本需求可走两种实现模式，请选择：**A) Spec 流程**（先出需求与设计文档，您确认后再实现）或 **B) Plan-Auto 流程**（AI 先出计划再自动增量实现并 E2E 验收）。请回复 A 或 B。」待用户回复 A/B 后再继续。
 
 ### Spec 模式：文档阶段（仅产出文档，然后停止）
 
@@ -33,12 +33,12 @@
 2. 在 `docs/spec/active/` 下创建或更新对应 spec，产出**需求说明文档**与**设计文档**（结构见 `spec_manager.md` 与 `docs/spec_process/SPEC_DOC_TEMPLATE.md`）。
 3. **然后停止**：回复中说明「已写好需求说明与设计文档，请查看 `docs/spec/active/` 下 [文件名]。确认无误或修改后，说「继续开发」我再按文档实现。」**不得**在未获用户确认前自动开始写 backend/frontend 代码。
 
-### Harnesses 模式：首轮与后续
+### Plan-Auto 模式：首轮与后续
 
-当用户选择 **Harnesses** 或已选过 Harnesses 时：
+当用户选择 **Plan-Auto** 或已选过 Plan-Auto 时：
 
-- **首轮（尚未有 feature list / init.sh / progress）**：执行 Skill `harnesses_initializer`：根据用户目标产出高层范围说明、`feature_list.json`、`init.sh`、`claude-progress.txt`（或等价），并做初始提交；然后说明「下一轮说「继续」或「下一轮」将按单 feature 增量实现」。
-- **后续轮（已有 feature list 与 progress）**：执行 Skill `harnesses_coding_session`：读 feature list 与 progress，选一个未完成 feature → 跑 init + 基线 E2E → 实现该条 → verify（build + test + E2E）→ 通过则标 passes，更新 progress 并提交。
+- **首轮（尚未有 feature list / init.sh / progress）**：执行 Skill `plan_auto_initializer`：根据用户目标产出高层范围说明、`feature_list.json`、`init.sh`、`claude-progress.txt`（或等价），并做初始提交；然后说明「下一轮说「继续」或「下一轮」将按单 feature 增量实现」。
+- **后续轮（已有 feature list 与 progress）**：执行 Skill `plan_auto_coding_session`：读 feature list 与 progress，选一个未完成 feature → 跑 init + 基线 E2E → 实现该条 → verify（build + test + E2E）→ 通过则标 passes，更新 progress 并提交。
 
 ### 继续开发（仅 Spec 模式；用户确认文档后）
 

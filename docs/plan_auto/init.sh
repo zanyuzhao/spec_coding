@@ -1,6 +1,6 @@
 #!/bin/bash
 # init.sh - 启动 spec_coding 开发环境
-# 用法: ./docs/harnesses/init.sh [--backend-only | --frontend-only | --check]
+# 用法: ./docs/plan_auto/init.sh [--backend-only | --frontend-only | --check]
 
 set -e
 

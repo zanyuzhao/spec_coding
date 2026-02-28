@@ -1,6 +1,6 @@
 #!/bin/bash
-# verify_harnesses.sh - 验证 Harnesses 流程完整性
-# 用法: ./docs/harnesses/verify_harnesses.sh
+# verify_plan_auto.sh - 验证 Plan-Auto 流程完整性
+# 用法: ./docs/plan_auto/verify_plan_auto.sh
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
@@ -39,7 +39,7 @@ section() {
 # 1. 验证 feature_list.json 结构
 section "1. 验证 feature_list.json"
 
-FEATURE_LIST="$PROJECT_ROOT/docs/harnesses/feature_list.json"
+FEATURE_LIST="$PROJECT_ROOT/docs/plan_auto/feature_list.json"
 if [ -f "$FEATURE_LIST" ]; then
     pass "feature_list.json 存在"
 
@@ -86,7 +86,7 @@ fi
 # 2. 验证 claude-progress.txt
 section "2. 验证 claude-progress.txt"
 
-PROGRESS_FILE="$PROJECT_ROOT/docs/harnesses/claude-progress.txt"
+PROGRESS_FILE="$PROJECT_ROOT/docs/plan_auto/claude-progress.txt"
 if [ -f "$PROGRESS_FILE" ]; then
     pass "claude-progress.txt 存在"
 
@@ -110,7 +110,7 @@ fi
 # 3. 验证 init.sh
 section "3. 验证 init.sh"
 
-INIT_SCRIPT="$PROJECT_ROOT/docs/harnesses/init.sh"
+INIT_SCRIPT="$PROJECT_ROOT/docs/plan_auto/init.sh"
 if [ -f "$INIT_SCRIPT" ]; then
     pass "init.sh 存在"
 
@@ -245,7 +245,7 @@ echo -e "${RED}失败: $FAIL_COUNT${NC}"
 echo ""
 
 if [ $FAIL_COUNT -eq 0 ]; then
-    echo -e "${GREEN}🎉 所有验证通过！Harnesses 流程已就绪。${NC}"
+    echo -e "${GREEN}🎉 所有验证通过！Plan-Auto 流程已就绪。${NC}"
     exit 0
 else
     echo -e "${RED}⚠️  有 $FAIL_COUNT 项验证失败，请检查。${NC}"

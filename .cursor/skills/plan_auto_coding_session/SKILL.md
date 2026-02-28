@@ -1,15 +1,15 @@
 ---
-name: harnesses_coding_session
-description: Harnesses 模式每轮执行：选一个未完成 feature → init+基线 E2E → 实现 → verify → 标 passes → 更新 progress 并提交。
+name: plan_auto_coding_session
+description: Plan-Auto 模式每轮执行：选一个未完成 feature → init+基线 E2E → 实现 → verify → 标 passes → 更新 progress 并提交。
 ---
 
-# Harnesses 编码 Session（每轮）
+# Plan-Auto 编码 Session（每轮）
 
-当用户在 **Harnesses** 模式下说「继续」「下一轮」「接着做」，或新 session 检测到已有 `feature_list.json` 与 `claude-progress.txt` 时，执行本 Skill。每轮**只做一条** feature，通过验证后才标记完成并交接。
+当用户在 **Plan-Auto** 模式下说「继续」「下一轮」「接着做」，或新 session 检测到已有 `feature_list.json` 与 `claude-progress.txt` 时，执行本 Skill。每轮**只做一条** feature，通过验证后才标记完成并交接。
 
 ## 触发条件
 
-- 用户已选择 **B / Harnesses** 模式，且 **harnesses_initializer** 已执行过（存在 feature list 与 progress 文件）。
+- 用户已选择 **B / Plan-Auto** 模式，且 **plan_auto_initializer** 已执行过（存在 feature list 与 progress 文件）。
 
 ## 执行步骤（每轮闭环）
 
@@ -28,7 +28,7 @@ description: Harnesses 模式每轮执行：选一个未完成 feature → init+
 
 - **仅**实现本轮选中的那一条 feature。
 - 建议按 **TDD**：先写/补该 feature 的测试或 E2E 步骤，再实现代码，通过后再重构。
-- 实现时遵守项目既有规范（如 `global_guard.mdc`、`api_pydantic_style`）。
+- 实现时遵守项目既有规范（如 `global_guard`、`api_pydantic_style`）。
 
 ### 4. Verify
 
@@ -42,7 +42,7 @@ description: Harnesses 模式每轮执行：选一个未完成 feature → init+
 
 ### 6. 交接
 
-- 写 **git commit**：清晰描述本轮完成的 feature（如 `feat(harnesses): implement <description>`）。
+- 写 **git commit**：清晰描述本轮完成的 feature（如 `feat(plan-auto): implement <description>`）。
 - 更新 **`claude-progress.txt`**：记录本轮完成的 feature、关键文件、已知注意点，便于下一轮或新 session 接上。
 
 ### 7. Code review（可选）
@@ -53,7 +53,14 @@ description: Harnesses 模式每轮执行：选一个未完成 feature → init+
 
 - 若仍有 `passes === false` 的 feature，回复：本轮已完成 [feature 描述]；说「继续」或「下一轮」将进行下一条。若全部完成，回复：所有 feature 已完成，请验收。
 
-## 与 Effective harnesses 文章一致
+### 9. 归档提示（所有 feature 完成时）
+
+当所有 feature 均已 `passes === true` 时，额外提示：
+- 「🎉 所有 features 已完成！需要归档吗？[Y] 归档 [N] 保留在活跃目录」
+- 若用户选择归档，执行 `./scripts/archive.sh --plan-auto`
+- 归档完成后说明：「已归档到 docs/plan_auto/archive/」
+
+## 核心理念
 
 - 每轮只做**一个** feature，避免一次做太多导致 context 耗尽或半成品。
 - 通过 **feature list + progress + git** 交接，新 session 可快速接上。

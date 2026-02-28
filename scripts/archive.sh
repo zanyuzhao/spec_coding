@@ -2,11 +2,11 @@
 # archive.sh - 统一归档脚本
 #
 # 用法:
-#   ./scripts/archive.sh --check          # 检查可归档项
-#   ./scripts/archive.sh --status           # 显示当前状态
+#   ./scripts/archive.sh --check           # 检查可归档项
+#   ./scripts/archive.sh --status          # 显示当前状态
 #   ./scripts/archive.sh --auto            # 自动归档所有
-#   ./scripts/archive.sh --spec <name>    # 归档指定 Spec
-#   ./scripts/archive.sh --harnesses       # 归档 Harnesses
+#   ./scripts/archive.sh --spec <name>     # 归档指定 Spec
+#   ./scripts/archive.sh --plan-auto       # 归档 Plan-Auto
 #   ./scripts/archive.sh --all             # 归档所有
 
 set -e
@@ -36,8 +36,8 @@ log_section() { echo -e "\n${BLUE}═══════════════�
 SPEC_ACTIVE_DIR="$PROJECT_ROOT/docs/spec/active"
 SPEC_ARCHIVE_DIR="$PROJECT_ROOT/docs/spec/archive"
 SPEC_SOT_DIR="$PROJECT_ROOT/docs/spec/specs"
-HARNESSES_DIR="$PROJECT_ROOT/docs/harnesses"
-HARNESSES_ARCHIVE_DIR="$PROJECT_ROOT/docs/harnesses/archive"
+PLAN_AUTO_DIR="$PROJECT_ROOT/docs/plan_auto"
+PLAN_AUTO_ARCHIVE_DIR="$PROJECT_ROOT/docs/plan_auto/archive"
 
 # ========================================
 # Spec 归档逻辑
@@ -130,12 +130,12 @@ merge_spec_to_sot() {
 }
 
 # ========================================
-# Harnesses 归档逻辑
+# Plan-Auto 归档逻辑
 # ========================================
 
-# 检查 Harnesses 是否可归档
-check_harnesses_archive() {
-    local feature_list="$HARNESSES_DIR/feature_list.json"
+# 检查 Plan-Auto 是否可归档
+check_plan_auto_archive() {
+    local feature_list="$PLAN_AUTO_DIR/feature_list.json"
 
     if [[ ! -f "$feature_list" ]]; then
         echo ""
@@ -155,20 +155,20 @@ check_harnesses_archive() {
     fi
 }
 
-# 归档 Harnesses
-archive_harnesses() {
+# 归档 Plan-Auto
+archive_plan_auto() {
     local archive_date=$(date +%Y-%m-%d)
 
     # 获取项目名
     local project_name=$(python3 -c "
 import json
-data = json.load(open('$HARNESSES_DIR/feature_list.json'))
+data = json.load(open('$PLAN_AUTO_DIR/feature_list.json'))
 print(data.get('project', 'unknown'))
 " 2>/dev/null)
 
-    local target_dir="$HARNESSES_ARCHIVE_DIR/${archive_date}_${project_name}"
+    local target_dir="$PLAN_AUTO_ARCHIVE_DIR/${archive_date}_${project_name}"
 
-    log_info "归档 Harnesses: $project_name"
+    log_info "归档 Plan-Auto: $project_name"
 
     # 创建归档目录
     mkdir -p "$target_dir"
@@ -177,7 +177,7 @@ print(data.get('project', 'unknown'))
     local files_to_archive=("scope.md" "feature_list.json" "claude-progress.txt")
 
     for file in "${files_to_archive[@]}"; do
-        local src="$HARNESSES_DIR/$file"
+        local src="$PLAN_AUTO_DIR/$file"
         if [[ -f "$src" ]]; then
             mv "$src" "$target_dir/"
             log_info "  归档: $file"
@@ -185,7 +185,7 @@ print(data.get('project', 'unknown'))
     done
 
     # 归档所有 *_feature_list.json
-    for fl_file in "$HARNESSES_DIR"/*_feature_list.json; do
+    for fl_file in "$PLAN_AUTO_DIR"/*_feature_list.json; do
         if [[ -f "$fl_file" ]]; then
             mv "$fl_file" "$target_dir/"
             log_info "  归档: $(basename "$fl_file")"
@@ -193,7 +193,7 @@ print(data.get('project', 'unknown'))
     done
 
     # 归档所有 *_progress.txt
-    for progress_file in "$HARNESSES_DIR"/*_progress.txt; do
+    for progress_file in "$PLAN_AUTO_DIR"/*_progress.txt; do
         if [[ -f "$progress_file" ]]; then
             mv "$progress_file" "$target_dir/"
             log_info "  归档: $(basename "$progress_file")"
@@ -201,7 +201,7 @@ print(data.get('project', 'unknown'))
     done
 
     # 归档设计文档
-    for design_file in "$HARNESSES_DIR"/*_design.md; do
+    for design_file in "$PLAN_AUTO_DIR"/*_design.md; do
         if [[ -f "$design_file" ]]; then
             mv "$design_file" "$target_dir/"
             log_info "  归档: $(basename "$design_file")"
@@ -209,7 +209,7 @@ print(data.get('project', 'unknown'))
     done
 
     # 归档设计文档（*.md 文件，除了保留的）
-    for md_file in "$HARNESSES_DIR"/*.md; do
+    for md_file in "$PLAN_AUTO_DIR"/*.md; do
         if [[ -f "$md_file" ]]; then
             local filename=$(basename "$md_file")
             # 保留 mcp_setup.md
@@ -221,7 +221,7 @@ print(data.get('project', 'unknown'))
         fi
     done
 
-    log_info "✅ Harnesses 归档完成: $target_dir"
+    log_info "✅ Plan-Auto 归档完成: $target_dir"
 }
 
 # ========================================
@@ -238,19 +238,19 @@ show_status() {
         echo -e "${GREEN}没有可归档的 Spec${NC}"
     fi
 
-    # Harnesses 状态
-    local harnesses=$(check_harnesses_archive)
-    if [[ -n "$harnesses" ]]; then
-        echo -e "${YELLOW}可归档的 Harnesses: ${harnesses}${NC}"
+    # Plan-Auto 状态
+    local plan_auto=$(check_plan_auto_archive)
+    if [[ -n "$plan_auto" ]]; then
+        echo -e "${YELLOW}可归档的 Plan-Auto: ${plan_auto}${NC}"
     else
-        echo -e "${GREEN}没有可归档的 Harnesses${NC}"
+        echo -e "${GREEN}没有可归档的 Plan-Auto${NC}"
     fi
 
     # 显示归档目录
     echo ""
     echo -e "${CYAN}归档目录:${NC}"
-    echo "  Spec:       $SPEC_ARCHIVE_DIR"
-    echo "  Harnesses: $HARNESSES_ARCHIVE_DIR"
+    echo "  Spec:      $SPEC_ARCHIVE_DIR"
+    echo "  Plan-Auto: $PLAN_AUTO_ARCHIVE_DIR"
 }
 
 # ========================================
@@ -261,7 +261,7 @@ main() {
     local target=${2:-}
 
     # 确保目录存在
-    mkdir -p "$SPEC_ARCHIVE_DIR" "$HARNESSES_ARCHIVE_DIR"
+    mkdir -p "$SPEC_ARCHIVE_DIR" "$PLAN_AUTO_ARCHIVE_DIR"
 
     case "$mode" in
         --check)
@@ -280,9 +280,9 @@ main() {
                 [[ -n "$spec" ]] && archive_spec "$spec"
             done
 
-            # 归档 Harnesses
-            local harnesses=$(check_harnesses_archive)
-            [[ -n "$harnesses" ]] && archive_harnesses
+            # 归档 Plan-Auto
+            local plan_auto=$(check_plan_auto_archive)
+            [[ -n "$plan_auto" ]] && archive_plan_auto
 
             log_info "自动归档完成"
             ;;
@@ -296,8 +296,8 @@ main() {
             archive_spec "$target"
             ;;
 
-        --harnesses)
-            archive_harnesses
+        --plan-auto|--harnesses)
+            archive_plan_auto
             ;;
 
         --all)
@@ -308,8 +308,8 @@ main() {
                 [[ -n "$spec" ]] && archive_spec "$spec"
             done
 
-            # 归档 Harnesses
-            archive_harnesses
+            # 归档 Plan-Auto
+            archive_plan_auto
 
             log_info "所有归档完成"
             ;;
@@ -318,21 +318,21 @@ main() {
             echo "Archive.sh - 统一归档脚本"
             echo ""
             echo "用法:"
-            echo "  $0 --check          检查可归档项"
-            echo "  $0 --status         显示当前状态"
-            echo "  $0 --auto           自动归档所有"
-            echo "  $0 --spec <name>    归档指定 Spec"
-            echo "  $0 --harnesses       归档 Harnesses"
+            echo "  $0 --check           检查可归档项"
+            echo "  $0 --status          显示当前状态"
+            echo "  $0 --auto            自动归档所有"
+            echo "  $0 --spec <name>     归档指定 Spec"
+            echo "  $0 --plan-auto       归档 Plan-Auto"
             echo "  $0 --all             归档所有"
             echo ""
             echo "归档目录:"
-            echo "  Spec:       docs/spec/archive/"
-            echo "  Harnesses: docs/harnesses/archive/"
+            echo "  Spec:      docs/spec/archive/"
+            echo "  Plan-Auto: docs/plan_auto/archive/"
             ;;
 
         *)
             log_error "未知模式: $mode"
-            echo "用法: $0 [--check|--status|--auto|--spec|--harnesses|--all|--help]"
+            echo "用法: $0 [--check|--status|--auto|--spec|--plan-auto|--all|--help]"
             exit 1
             ;;
     esac
