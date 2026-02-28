@@ -184,22 +184,27 @@ print(data.get('project', 'unknown'))
         fi
     done
 
+    # 归档所有 *_feature_list.json
+    for fl_file in "$HARNESSES_DIR"/*_feature_list.json; do
+        if [[ -f "$fl_file" ]]; then
+            mv "$fl_file" "$target_dir/"
+            log_info "  归档: $(basename "$fl_file")"
+        fi
+    done
+
+    # 归档所有 *_progress.txt
+    for progress_file in "$HARNESSES_DIR"/*_progress.txt; do
+        if [[ -f "$progress_file" ]]; then
+            mv "$progress_file" "$target_dir/"
+            log_info "  归档: $(basename "$progress_file")"
+        fi
+    done
+
     # 归档设计文档
     for design_file in "$HARNESSES_DIR"/*_design.md; do
         if [[ -f "$design_file" ]]; then
             mv "$design_file" "$target_dir/"
             log_info "  归档: $(basename "$design_file")"
-        fi
-    done
-
-    # 归档需求特定文件
-    local files_to_check=("scope.md" "feature_list.json" "claude-progress.txt")
-
-    for file in "${files_to_check[@]}"; do
-        local src="$HARNESSES_DIR/$file"
-        if [[ -f "$src" ]]; then
-            mv "$src" "$target_dir/"
-            log_info "  归档: $file"
         fi
     done
 
