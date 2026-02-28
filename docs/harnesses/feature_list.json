@@ -85,7 +85,7 @@
         "在 README.md 中更新工具链章节",
         "确保文档与实际配置一致"
       ],
-      "passes": false
+      "passes": true
     }
   ]
 }

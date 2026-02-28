@@ -70,3 +70,47 @@
 - 全局与后端/前端代码规范：`global_guard.md`、`fastapi_shield.md`、`frontend_architect.md`。
 - 领域与 spec 命名（下划线）：Skill `domain_naming_convention`（`.claude/skills/domain_naming_convention/SKILL.md`）。
 - API 与 Pydantic 风格：Skill `api_pydantic_style`（`.claude/skills/api_pydantic_style/SKILL.md`）。
+
+---
+
+## 工具链
+
+### MCP 服务器
+
+项目已配置以下 MCP 服务器（`.cursor/mcp.json`）：
+
+| MCP | 用途 | 验证方式 |
+|-----|------|----------|
+| **memory** | 跨会话持久化记忆 | 自动可用 |
+| **sqlite** | 数据库操作与查询 | 「列出 SQLite 数据库中的所有表」 |
+| **playwright** | 浏览器自动化、E2E 测试、截图 | 「用 Playwright 打开 example.com 并截图」 |
+
+详细配置见 `docs/harnesses/mcp_setup.md`。
+
+### Skills
+
+| Skill | 用途 | 调用方式 |
+|-------|------|----------|
+| **curl_test** | cURL 接口测试模板 | `/curl_test` 或自动使用 |
+| **git_operations** | Git 工作流封装（禁止自动 push） | `/git_operations` 或自动使用 |
+
+### 启动脚本
+
+```bash
+# 启动全部服务
+./docs/harnesses/init.sh
+
+# 仅启动后端/前端
+./docs/harnesses/init.sh --backend-only
+./docs/harnesses/init.sh --frontend-only
+
+# 检查服务状态
+./docs/harnesses/init.sh --check
+```
+
+### 验证脚本
+
+```bash
+# 验证 Harnesses 流程完整性
+./docs/harnesses/verify_harnesses.sh
+```

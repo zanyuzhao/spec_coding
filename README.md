@@ -110,3 +110,37 @@ spec-coding init
 - **Cursor Skills 与 MCP**：推荐清单见 [docs/cursor_skills_and_mcp.md](docs/cursor_skills_and_mcp.md)；可选安装脚本见 `scripts/skills_and_mcps/`。
 
 **后端 Lint / 类型检查**（可选）：`pip install -r requirements_dev.txt` 后执行 `ruff check .`、`ruff format --check .`、`pyright`。前端默认请求 `http://127.0.0.1:8000`，可通过 `NEXT_PUBLIC_API_URL` 覆盖。
+
+---
+
+## 工具链（MCP + Skills）
+
+### MCP 服务器
+
+| MCP | 包 | 用途 |
+|-----|-----|------|
+| **memory** | `@modelcontextprotocol/server-memory` | 跨会话持久化记忆 |
+| **sqlite** | `mcp-server-sqlite` (PyPI) | 数据库操作与查询 |
+| **playwright** | `@playwright/mcp` (npm) | 浏览器自动化、E2E 测试 |
+
+配置文件：`.cursor/mcp.json`。详细说明见 `docs/harnesses/mcp_setup.md`。
+
+### Skills
+
+| Skill | 用途 |
+|-------|------|
+| **curl_test** | cURL 接口测试模板（GET/POST/PUT/DELETE、认证、断言） |
+| **git_operations** | Git 工作流封装（新需求开分支、禁止自动 push） |
+
+### 开发脚本
+
+```bash
+# 启动开发环境
+./docs/harnesses/init.sh
+
+# 检查服务状态
+./docs/harnesses/init.sh --check
+
+# 验证 Harnesses 流程
+./docs/harnesses/verify_harnesses.sh
+```
