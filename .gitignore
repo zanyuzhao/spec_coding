@@ -1,5 +1,32 @@
-# spec_cli 的 templates 由仓库根 .cursor 与 docs 在构建时生成，不提交
-spec_cli/spec_cli/templates/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Node
+node_modules/
 
 # Database files (MCP)
 data/*.db
@@ -9,3 +36,19 @@ data/*.db-journal
 .env
 .env.local
 .env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# spec_cli 的 templates 由仓库根 .cursor 与 docs 在构建时生成，不提交
+spec_cli/spec_cli/templates/
+
+# Dev services 配置（运行时生成）
+.dev-services/

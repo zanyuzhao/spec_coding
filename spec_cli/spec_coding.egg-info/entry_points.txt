@@ -1,2 +1,0 @@
-[console_scripts]
-spec-coding = spec_cli.cli:main
