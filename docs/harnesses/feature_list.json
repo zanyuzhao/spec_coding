@@ -61,7 +61,7 @@
         "添加健康检查（curl backend/frontend 健康端点）",
         "验证脚本可执行且服务正常启动"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "F006",

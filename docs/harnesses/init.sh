@@ -90,10 +90,10 @@ wait_for_service() {
 if [ "$CHECK_ONLY" = true ]; then
     log_info "检查服务健康状态..."
 
-    BACKEND_HEALTH="http://127.0.0.1:8000/docs"
+    BACKEND_HEALTH="http://127.0.0.1:8000/health"
     FRONTEND_HEALTH="http://127.0.0.1:3000"
 
-    if curl -s "$BACKEND_HEALTH" >/dev/null 2>&1; then
+    if curl -s "$BACKEND_HEALTH" 2>/dev/null | grep -q '"status"'; then
         log_info "后端服务: ${GREEN}健康${NC}"
     else
         log_warn "后端服务: ${RED}未运行${NC}"
@@ -113,22 +113,43 @@ start_backend() {
     log_info "检查后端依赖..."
     cd "$BACKEND_DIR"
 
-    if [ ! -d ".venv" ] && [ ! -f "poetry.lock" ]; then
-        log_info "安装后端依赖..."
-        pip install -e "$PROJECT_ROOT" >/dev/null 2>&1 || true
+    # 检查 uv 是否可用
+    if command -v uv &> /dev/null || [ -f "$HOME/.local/bin/uv" ]; then
+        export PATH="$HOME/.local/bin:$PATH"
+
+        # 使用 uv 安装依赖（如果需要）
+        if [ ! -d ".venv" ]; then
+            log_info "使用 uv 安装后端依赖..."
+            uv sync --quiet 2>/dev/null || uv pip install -r requirements.txt --quiet 2>/dev/null || true
+        fi
+
+        if check_port 8000; then
+            log_warn "端口 8000 已被占用，跳过后端启动"
+            return 0
+        fi
+
+        log_info "启动后端服务 (FastAPI on port 8000)..."
+        nohup uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload \
+            > /tmp/spec_coding_backend.log 2>&1 &
+    else
+        # 回退到传统方式
+        if [ ! -d ".venv" ]; then
+            log_info "安装后端依赖..."
+            python3 -m venv .venv
+            .venv/bin/pip install -r requirements.txt >/dev/null 2>&1 || true
+        fi
+
+        if check_port 8000; then
+            log_warn "端口 8000 已被占用，跳过后端启动"
+            return 0
+        fi
+
+        log_info "启动后端服务 (FastAPI on port 8000)..."
+        nohup .venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload \
+            > /tmp/spec_coding_backend.log 2>&1 &
     fi
 
-    if check_port 8000; then
-        log_warn "端口 8000 已被占用，跳过后端启动"
-        return 0
-    fi
-
-    log_info "启动后端服务 (FastAPI on port 8000)..."
-    # 后台启动
-    nohup python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload \
-        > /tmp/spec_coding_backend.log 2>&1 &
-
-    wait_for_service "http://127.0.0.1:8000/docs" "后端"
+    wait_for_service "http://127.0.0.1:8000/health" "后端"
 }
 
 # 启动前端

@@ -10,11 +10,18 @@
 - F002: Playwright MCP 配置 ✅ [completed]
 - F003: curl_test Skill ✅ [completed]
 - F004: git_operations Skill ✅ [completed]
-- F005: init.sh 启动脚本 [pending]
+- F005: init.sh 启动脚本 ✅ [completed]
 - F006: Harnesses 流程验证 [pending]
 - F007: 文档更新 [pending]
 
 ## 进度历史
+
+### 2026-02-28 - F005 完成
+- init.sh 已存在（初始化时创建），优化后端启动逻辑
+- 更新使用 /health 端点替代 /docs 进行健康检查
+- 支持 uv 工具管理后端依赖（自动回退到 venv）
+- 验证后端可正常启动（curl http://127.0.0.1:8000/health 返回 {"status":"ok"}）
+- 支持 --backend-only、--frontend-only、--check 参数
 
 ### 2026-02-28 - F004 完成
 - 创建 .claude/skills/git_operations/SKILL.md
