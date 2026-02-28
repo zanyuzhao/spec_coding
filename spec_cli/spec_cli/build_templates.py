@@ -103,11 +103,11 @@ def build() -> bool:
                 dest_file = claude_rules_dst / rel
                 _copy_with_placeholders(f, dest_file, apply_placeholders=True)
 
-    # .cursor/skills -> templates/claude/skills（与 Cursor 同源，供 Claude Code 使用）
-    skills_src = repo / ".cursor" / "skills"
+    # .claude/skills -> templates/claude/skills（Claude Code 独立维护，不覆盖 .cursor/skills）
+    claude_skills_src = repo / ".claude" / "skills"
     claude_skills_dst = templates / "claude" / "skills"
-    if skills_src.is_dir():
-        for item in skills_src.iterdir():
+    if claude_skills_src.is_dir():
+        for item in claude_skills_src.iterdir():
             if item.is_dir():
                 for f in item.rglob("*"):
                     if f.is_file():
