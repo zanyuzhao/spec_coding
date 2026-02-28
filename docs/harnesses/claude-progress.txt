@@ -11,10 +11,20 @@
 - F003: curl_test Skill ✅ [completed]
 - F004: git_operations Skill ✅ [completed]
 - F005: init.sh 启动脚本 ✅ [completed]
-- F006: Harnesses 流程验证 [pending]
+- F006: Harnesses 流程验证 ✅ [completed]
 - F007: 文档更新 [pending]
 
 ## 进度历史
+
+### 2026-02-28 - F006 完成
+- 创建 verify_harnesses.sh 验证脚本
+- 验证 feature_list.json 结构和 JSON 语法
+- 验证 claude-progress.txt 可读写
+- 验证 init.sh 可执行、语法正确、功能正常
+- 验证 MCP 配置（3个服务器：memory, sqlite, playwright）
+- 验证 Skills（curl_test, git_operations）
+- 验证后端服务可启动且健康检查通过
+- 所有 20 项验证全部通过
 
 ### 2026-02-28 - F005 完成
 - init.sh 已存在（初始化时创建），优化后端启动逻辑

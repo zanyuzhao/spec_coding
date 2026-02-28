@@ -74,7 +74,7 @@
         "验证 harnesses_coding_session skill 可正确读取 feature list",
         "创建验证脚本 docs/harnesses/verify_harnesses.sh"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "F007",
