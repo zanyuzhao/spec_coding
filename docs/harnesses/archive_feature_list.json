@@ -25,7 +25,7 @@
         "实现 merge_to_sot 函数",
         "测试 Spec 归档流程"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "F003",
@@ -36,7 +36,7 @@
         "实现 archive_harnesses 函数",
         "测试 Harnesses 归档流程"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "F004",
@@ -48,7 +48,7 @@
         "创建进度文件记录",
         "最终验证"
       ],
-      "passes": false
+      "passes": true
     }
   ]
 }

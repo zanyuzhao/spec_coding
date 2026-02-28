@@ -7,9 +7,9 @@
 
 ## Feature 总览
 - F001: 核心框架 ✅ [completed]
-- F002: Spec 归档逻辑 [pending]
-- F003: Harnesses 归档逻辑 [pending]
-- F004: 集成到开发流程 [pending]
+- F002: Spec 归档逻辑 ✅ [completed]
+- F003: Harnesses 归档逻辑 ✅ [completed]
+- F004: 集成到开发流程 ✅ [completed]
 
 ## 进度历史
 
@@ -18,6 +18,13 @@
 - 实现 --check/--status/--auto/--spec/--harnesses/--all 模式
 - 验证通过: `./scripts/archive.sh --check` 正常工作
 - 检测到可归档的 Harnesses: spec_coding_toolchain
+
+### 2026-02-28 - F002-F004 完成
+- F002: Spec 归档逻辑已实现 (check_spec_archive, archive_spec, merge_spec_to_sot)
+- F003: Harnesses 归档逻辑已实现 (check_harnesses_archive, archive_harnesses)
+- F004: 集成到开发流程
+  - 更新 spec_trigger.md 添加归档前置检查
+  - 更新 harnesses_coding_session 添加归档提示
 
 ## 使用方法
 
