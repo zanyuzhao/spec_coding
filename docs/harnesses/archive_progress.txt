@@ -1,0 +1,39 @@
+# Archive 自动化 - 进度追踪
+
+## 项目信息
+- 项目名: archive_automation
+- 模式: Harnesses
+- 开始时间: 2026-02-28
+
+## Feature 总览
+- F001: 核心框架 ✅ [completed]
+- F002: Spec 归档逻辑 [pending]
+- F003: Harnesses 归档逻辑 [pending]
+- F004: 集成到开发流程 [pending]
+
+## 进度历史
+
+### 2026-02-28 - F001 完成
+- 创建 scripts/archive.sh
+- 实现 --check/--status/--auto/--spec/--harnesses/--all 模式
+- 验证通过: `./scripts/archive.sh --check` 正常工作
+- 检测到可归档的 Harnesses: spec_coding_toolchain
+
+## 使用方法
+
+```bash
+# 检查状态
+./scripts/archive.sh --check
+
+# 自动归档
+./scripts/archive.sh --auto
+
+# 归档指定 Spec
+./scripts/archive.sh --spec user_auth
+
+# 归档 Harnesses
+./scripts/archive.sh --harnesses
+
+# 归档所有
+./scripts/archive.sh --all
+```
