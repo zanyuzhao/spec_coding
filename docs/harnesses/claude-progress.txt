@@ -8,13 +8,21 @@
 ## Feature 总览
 - F001: SQLite MCP 配置 ✅ [completed]
 - F002: Playwright MCP 配置 ✅ [completed]
-- F003: curl_test Skill [pending]
+- F003: curl_test Skill ✅ [completed]
 - F004: git_operations Skill [pending]
 - F005: init.sh 启动脚本 [pending]
 - F006: Harnesses 流程验证 [pending]
 - F007: 文档更新 [pending]
 
 ## 进度历史
+
+### 2026-02-28 - F003 完成
+- 创建 .claude/skills/curl_test/SKILL.md
+- 定义 GET/POST/PUT/DELETE 请求模板
+- 定义认证头配置（Bearer Token、Basic Auth、API Key）
+- 定义响应断言模式（状态码、响应体检查）
+- 定义完整测试函数模板
+- Skill 已被 Claude Code 识别
 
 ### 2026-02-28 - F002 完成
 - 配置 Playwright MCP（@playwright/mcp@latest，Microsoft 官方）

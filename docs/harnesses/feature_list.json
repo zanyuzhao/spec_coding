@@ -35,7 +35,7 @@
         "定义认证头、JSON body、响应断言等模板",
         "验证 skill 可被 Claude Code 识别和调用"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "F004",
