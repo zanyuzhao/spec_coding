@@ -37,6 +37,11 @@ while [[ $# -gt 0 ]]; do
             echo "  --frontend-only  仅启动前端"
             echo "  --check          仅检查服务健康状态"
             echo "  --help, -h       显示帮助"
+            echo ""
+            echo "环境配置:"
+            echo "  首次运行会自动创建 .env 文件："
+            echo "  - backend/.env        后端环境变量"
+            echo "  - frontend/.env.local 前端环境变量"
             exit 0
             ;;
         *)
@@ -55,6 +60,48 @@ NC='\033[0m' # No Color
 log_info() { echo -e "${GREEN}[INFO]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 log_error() { echo -e "${RED}[ERROR]${NC} $1"; }
+
+# 环境配置模板
+setup_env_files() {
+    # 后端 .env
+    if [ ! -f "$BACKEND_DIR/.env" ]; then
+        log_info "创建后端 .env 文件..."
+        cat > "$BACKEND_DIR/.env" << 'EOF'
+# 数据库配置
+DATABASE_URL=sqlite:///./spec_coding.db
+
+# JWT 配置
+SECRET_KEY=your-secret-key-change-in-production
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# API 配置
+API_PREFIX=/api
+CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+
+# 环境
+ENVIRONMENT=development
+EOF
+        log_info "已创建 backend/.env（开发环境默认配置）"
+    else
+        log_info "后端 .env 已存在，跳过创建"
+    fi
+
+    # 前端 .env.local
+    if [ ! -f "$FRONTEND_DIR/.env.local" ]; then
+        log_info "创建前端 .env.local 文件..."
+        cat > "$FRONTEND_DIR/.env.local" << 'EOF'
+# API 地址
+NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+
+# 环境
+NODE_ENV=development
+EOF
+        log_info "已创建 frontend/.env.local（开发环境默认配置）"
+    else
+        log_info "前端 .env.local 已存在，跳过创建"
+    fi
+}
 
 # 检查端口是否被占用
 check_port() {
@@ -178,6 +225,9 @@ start_frontend() {
 main() {
     log_info "初始化 spec_coding 开发环境..."
     log_info "项目根目录: $PROJECT_ROOT"
+
+    # 设置环境配置文件
+    setup_env_files
 
     if [ "$START_BACKEND" = true ]; then
         start_backend
