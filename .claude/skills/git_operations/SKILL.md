@@ -9,10 +9,33 @@ description: Git 操作封装。提供标准化的 Git 工作流模板，包括�
 
 ## 核心原则
 
-⚠️ **重要规则**：
-1. **新需求必须开新分支** - 禁止直接在 main 分支开发
-2. **禁止自动 push** - 只能执行 commit，push 必须由人类手动执行
-3. **有层次的分支管理** - 功能分支 → 合并到 main
+⚠️ **强制规则**：
+1. **禁止在主分支开发** - main、master、sit 等主分支**禁止直接修改代码**
+2. **新需求必须开新分支** - 检测到在主分支时，必须先创建 feature 分支
+3. **连续修改使用同一分支** - 同一大需求的连续修改可使用同一分支
+4. **禁止自动 push** - 只能执行 commit，push 必须由人类手动执行
+
+### 主分支检测（强制执行）
+
+在开始任何代码修改前，必须检查当前分支：
+
+```bash
+# 检测当前分支
+git branch --show-current
+
+# 如果输出是 main/master/sit 等主分支，必须先创建新分支
+if current_branch in ['main', 'master', 'sit', 'dev', 'develop', 'staging', 'production']:
+    # 必须创建新分支
+    git checkout -b feature/<feature-name>
+```
+
+### 允许直接修改的场景
+
+仅在以下场景可在主分支直接操作：
+- 查看 git 状态（git status）
+- 查看历史（git log）
+- 拉取更新（git pull）
+- 切换分支（git checkout）
 
 ## 何时使用
 
