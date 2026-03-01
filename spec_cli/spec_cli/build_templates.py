@@ -120,6 +120,12 @@ def build() -> bool:
     if claude_md_src.is_file():
         _copy_with_placeholders(claude_md_src, templates / "CLAUDE.md", apply_placeholders=True)
 
+    # .cursor/mcp.json -> templates/cursor/mcp.json（MCP 服务器配置模板）
+    mcp_src = repo / ".cursor" / "mcp.json"
+    mcp_dst = templates / "cursor" / "mcp.json"
+    if mcp_src.is_file():
+        _copy_with_placeholders(mcp_src, mcp_dst, apply_placeholders=False)
+
     print(f"已从 {repo} 生成 templates -> {templates}")
     return True
 
