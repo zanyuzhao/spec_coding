@@ -3,6 +3,7 @@
 本目录存放**与 spec 流程本身相关**的文档，而非具体业务需求。
 
 - **需求说明与设计文档模板**：[SPEC_DOC_TEMPLATE.md](./SPEC_DOC_TEMPLATE.md) — 新需求时产出文档的结构；产出后停止，待用户确认再说「继续开发」。
+- **Spec 前 Plan 澄清指引**：[`SPEC_PLAN_GUIDE.md`](./SPEC_PLAN_GUIDE.md) — 在创建 `docs/spec/active/xxx.md` 之前，用 Plan 能力进行多轮澄清与边界确认的推荐做法。
 - **开发清单与归档检查列表**：[CHECKLISTS.md](./CHECKLISTS.md) — 实现与归档时逐项核对。
 - **测试最佳实践**：[testing_best_practices.md](./testing_best_practices.md) — 测试策略、工具及可选性设计指南。
 - **不存放**：具体需求 spec（业务 spec 仅存在于 `docs/spec/active/`、`docs/spec/archive/`、`docs/spec/specs/`）。

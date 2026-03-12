@@ -29,9 +29,13 @@
 
 当用户选择 **Spec** 或已选过 Spec 时，触发后你必须：
 
-1. 先列出现有 `docs/spec/active/` 避免重复或冲突。
-2. 在 `docs/spec/active/` 下创建或更新对应 spec，产出**需求说明文档**与**设计文档**（结构见 `spec_manager.md` 与 `docs/spec_process/SPEC_DOC_TEMPLATE.md`）。
-3. **然后停止**：回复中说明「已写好需求说明与设计文档，请查看 `docs/spec/active/` 下 [文件名]。确认无误或修改后，说「继续开发」我再按文档实现。」**不得**在未获用户确认前自动开始写 backend/frontend 代码。
+1. **先做「Plan 式澄清」再写文档**（仅当需求尚不清晰或边界未定时）：
+   - 对于明显属于「新功能/改需求」且信息不全的任务，应先通过 `SwitchMode` 切换到 **Plan 模式**，用多轮提问方式补齐：用户/场景、性能与数据规模、安全与权限、多租户/租户边界、失败/异常流、非目标（明确不做什么）等关键约束。Plan 结束后再回到 Agent 模式，并将关键决策总结为要点列表。Plan 阶段**只问问题与做决策，不改代码、不直接生成实现**，产出的结论应在后续步骤中写入 `docs/spec/active/` 下的文档。
+
+2. 在 Plan 阶段结束或需求已足够清晰时：
+   1. 先列出现有 `docs/spec/active/` 避免重复或冲突。
+   2. 在 `docs/spec/active/` 下创建或更新对应 spec，产出**需求说明文档**与**设计文档**（结构见 `spec_manager.md` 与 `docs/spec_process/SPEC_DOC_TEMPLATE.md`），并在文档中吸收 Plan 阶段沉淀下来的关键决策与边界。
+   3. **然后停止**：回复中说明「已写好需求说明与设计文档，请查看 `docs/spec/active/` 下 [文件名]。确认无误或修改后，说「继续开发」我再按文档实现。」**不得**在未获用户确认前自动开始写 backend/frontend 代码。
 
 ### Plan-Auto 模式：首轮与后续
 
